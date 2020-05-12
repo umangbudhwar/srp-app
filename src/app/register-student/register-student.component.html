@@ -1,0 +1,35 @@
+<div class="wrapper">
+    <div class="main-panel">
+        <div class="content"
+				style="z-index: 5; padding-top: 50px; padding-bottom: 0px;min-height: unset;">
+				<h5 style="color:#db3236;" align="center"></h5>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <dx-popup
+                                [width]="800"
+                                [height]="400"
+                                [showTitle]="true"
+                                title="Student Registration"
+                                [dragEnabled]="false"
+                                [showCloseButton] = "false"
+                                [closeOnOutsideClick]="false"
+                                [(visible)]="studentRegistrationPopupVisible">
+                                <div class = "popupStyle" *dxTemplate="let data of 'content'">
+                                    <h4 class = "myfont">Register Here</h4>
+                                </div>
+                            </dx-popup>
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<dx-load-panel shadingColor = "rgba(0,0,0,0.4)"  [showIndicator] = "true" [(visible)] = "loadingVisible"
+                [shading] = "true" [closeOnOutsideClick] = "false">
+               <!-- [showPanel] = "true"  -->
+</dx-load-panel>

@@ -1,0 +1,35 @@
+::ng-deep #container {
+    padding: 10px;
+}
+::ng-deep #container ul {
+    list-style-type: none;
+    text-align: center;
+}
+::ng-deep #container ul li {
+    display: inline-block;
+    width: 160px;
+    margin: 10px;
+}
+::ng-deep #container ul li img{
+    width: 100px;
+}
+::ng-deep .button-info {
+    margin: 10px;
+}
+::ng-deep .dx-popup-content p {
+    margin-bottom: 10px;
+    margin-top: 0;
+}
+.popupStyle{
+    text-align: center;
+    align-content: center;
+}
+.buttonStyle{
+    width: 70%;
+    height: 60%;
+}
+.myfont{
+    font-size: 15px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-weight: 600;
+}

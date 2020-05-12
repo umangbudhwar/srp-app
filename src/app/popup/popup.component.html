@@ -1,0 +1,82 @@
+<div class="wrapper">
+    <div class="main-panel">
+        <div class="content"
+				style="z-index: 5; padding-top: 50px; padding-bottom: 0px;min-height: unset;">
+				<h5 style="color:#db3236;" align="center"></h5>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <dx-popup
+                                [width]="800"
+                                [height]="400"
+                                [showTitle]="true"
+                                title="Select User"
+                                [dragEnabled]="false"
+                                [showCloseButton] = "false"
+                                [closeOnOutsideClick]="false"
+                                [(visible)]="popupVisible">
+                                <div class = "popupStyle" *dxTemplate="let data of 'content'">
+                                    <h4 class = "myfont">Please select from the below option to move further.</h4>
+                                    <div class = "row">
+                                        <div class="col-md-6" style = "padding-left: 30px;">
+                                            <dx-button class="button-info" (onClick)="callFaculty()">
+                                                <img class = "buttonStyle" src="assets/images/faculty.png"/>
+                                            </dx-button><br>
+                                            <label class = "myfont">Faculty</label>
+                                        </div>
+                                        <div class="col-md-6" style = "padding-right: 20px;">
+                                            <dx-button class="button-info" routerLink="/registerStudent">
+                                                <img class = "buttonStyle" src="assets/images/student.png">
+                                            </dx-button>
+                                            <br>
+                                            <label class = "myfont">Student</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dx-popup>
+
+                            <dx-popup
+                                [width]="800"
+                                [height]="400"
+                                [showTitle]="true"
+                                title="Faculty"
+                                [dragEnabled]="false"
+                                [showCloseButton] = "false"
+                                [closeOnOutsideClick]="false"
+                                [(visible)]="facultyPopupVisible">
+                                <div class = "popupStyle" *dxTemplate="let data of 'content'">
+                                    <h4 class = "myfont">Faculty Dialog</h4>
+                                    <div class = "row">
+                                        <div class="col-md-6" style = "padding-left: 30px;">
+                                            <!-- <dx-button class="button-info" (onClick)="facultyRegistration()"> -->
+                                                <dx-button class="button-info" routerLink="/registerFaculty">
+                                                <img class = "buttonStyle" src="assets/images/register.png"/>
+                                            </dx-button><br>
+                                            <label class = "myfont">Faculty Registration</label>
+                                        </div>
+                                        <div class="col-md-6" style = "padding-right: 20px;">
+                                            <!-- <dx-button class="button-info" (onClick)="facultyLogin()"> -->
+                                                <dx-button class="button-info" routerLink="/login">
+                                                <img class = "buttonStyle" style = "height:135px; width: 250px;" src="assets/images/login.png">
+                                            </dx-button>
+                                            <br>
+                                            <label class = "myfont">Faculty Login</label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dx-popup>
+
+                        </div>  
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<dx-load-panel shadingColor = "rgba(0,0,0,0.4)"  [showIndicator] = "true" [(visible)] = "loadingVisible"
+                [shading] = "true" [closeOnOutsideClick] = "false">
+               <!-- [showPanel] = "true"  -->
+</dx-load-panel>
