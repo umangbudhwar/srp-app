@@ -20,21 +20,21 @@
                                 [closeOnOutsideClick]="false"
 								[(visible)]="facultyRegistrationPopupVisible">
 								<div class = "popupStyle" *dxTemplate="let data of 'content'">
-									<form [formGroup]="checkoutForm" (ngSubmit)="registerFaculty(checkoutForm.value)"> 
+									<form [formGroup]="checkoutForm" (ngSubmit)="submit()"> 
 										<div class="card-body">
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class = "myfont required">Faculty First Name</label> <input type="text"
 															class="form-control placeHolderFont" placeholder="Faculty First Name" 
-															formControlName="firstName">
+															formControlName="firstName" required>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class = "myfont required">Faculty Last Name</label> <input type="text"
 															class="form-control placeHolderFont" placeholder="Faculty Last Name" 
-															formControlName="lastName">
+															formControlName="lastName" required>
 													</div>
 												</div>
 											</div>
@@ -44,7 +44,7 @@
 													<div class="form-group">
 														<label class = "myfont required">Email ID</label> <input type="email"
 															class="form-control placeHolderFont" placeholder="Email ID" 
-															 formControlName="emailId" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$"> -->
+															required formControlName="emailId" pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
 													</div>
 												</div>
 
@@ -52,7 +52,7 @@
 													<div class="form-group">
 														<label class = "myfont required">Contact Number</label> <input type="number"
 															class="form-control placeHolderFont" placeholder="Contact Number" maxlength="10"  pattern="[0-9]{10}"
-															formControlName="contactNumber">
+															formControlName="contactNumber" required>
 													</div>
 												</div>
 											</div>
@@ -62,14 +62,14 @@
 													<div class="form-group">
 														<label class = "myfont required">Faculty UserName</label> <input type="text"
 															class="form-control placeHolderFont" placeholder="Select a UserName" 
-															formControlName="userName">
+															formControlName="userName" required>
 													</div>
 												</div>
 												<div class="col-md-6">	
 													<div class="form-group">
 													   <label class = "myfont required">Admin OTP</label> <input type="number"
 													   class="form-control placeHolderFont" placeholder="Admin OTP" 
-													   formControlName="adminOTP">
+													   formControlName="adminOTP" required>
 												   </div> 
 											   </div>
 											</div>
@@ -80,10 +80,7 @@
 													   <label class = "myfont required">Password</label> 
 													   <input type="password"
 														   class="form-control placeHolderFont" placeholder="Password" 
-														   formControlName="password"  id="password" >
-														   <div *ngIf="f.password.invalid" class="alert alert-danger">
-															<div *ngIf="f.password.errors.required">Password is required.</div>
-														</div>
+														   formControlName="password"  id="password" required>	
 												   </div>
 												  
 											   </div>
@@ -92,17 +89,14 @@
 														<label class = "myfont required">Confirm Password</label> 
 														<input type="password"
 															class="form-control placeHolderFont" placeholder="Confirm Password"
-															id="confirmPassword" >
-															<div *ngIf="f.confirm_password.invalid" class="alert alert-danger">
-																<div *ngIf="f.confirm_password.errors.required">Password is required.</div>
-																<div *ngIf="f.confirm_password.errors.confirmedValidator">Password and Confirm Password must be match.</div>
-															</div>
-													</div>
+															id="confirmPassword" required>
+															
+													 </div>
 												</div>
 											</div>
 											<br>
 											<div class="col-md-12 text-center">
-												<button type="submit" class="btn btn-info btn-fill">Submit</button>&nbsp; &nbsp;
+												<button type="submit" class="btn btn-info btn-fill" >Submit</button>&nbsp; &nbsp;
 												<!-- <button  class="btn btn-info btn-fill ">Cancel</button> -->
 											</div>
 										</div>

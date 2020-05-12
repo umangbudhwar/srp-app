@@ -23,23 +23,11 @@ export class RegisterFacultyComponent implements OnInit {
               private errorHandler: ErrorsHandler,
               private router: Router) {
 
-                this.checkoutForm = this.formBuilder.group({
-                  emailId: [null,Validators.required],
-                  userName: [null,Validators.required], // userId
-                  firstName: [null,Validators.required],
-                  lastName: [null,Validators.required],
-                  contactNumber: [null,Validators.required],
-                  adminOTP: [null,Validators.required],
-                  password: [null,Validators.required],
-                  confirmPassword: [null,Validators.required]
-                },
-                {validator:this.checkPasswords});
-
     }
 
   ngOnInit(): void {
     this.showInfo();
-    /* this.checkoutForm = this.formBuilder.group({
+    this.checkoutForm = this.formBuilder.group({
       emailId: [null,Validators.required],
       userName: [null,Validators.required], // userId
       firstName: [null,Validators.required],
@@ -49,19 +37,15 @@ export class RegisterFacultyComponent implements OnInit {
       password: [null,Validators.required],
       confirmPassword: [null,Validators.required]
     },
-    {validator:this.checkPasswords}); */
+    {validator:this.checkPasswords});
   }
 
-  checkPasswords(formGroup: FormGroup):boolean{
+  checkPasswords(formGroup: FormGroup){
     console.log('checkPasswords.')
     let password = formGroup.get('password').value;
     let confirmPassword = formGroup.get('confirmPassword').value;
 
-    return password == confirmPassword ? true : false;
-  }
-
-  get f(){
-    return this.checkoutForm.controls;
+    return password == confirmPassword ? null : {notSame: true};
   }
 
   showInfo() {
@@ -69,8 +53,9 @@ export class RegisterFacultyComponent implements OnInit {
     this.loadingVisible = false;
   }
 
-  registerFaculty(faculty:Faculty): void
+  submit()
   {
+    let faculty: Faculty = this.checkoutForm.value;
     console.log('registerFaculty called');
     this.facultyService.registerFaculty(faculty)
     .subscribe(data => {
