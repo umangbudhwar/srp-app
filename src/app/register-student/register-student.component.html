@@ -1,35 +1,254 @@
 <div class="wrapper">
     <div class="main-panel">
         <div class="content"
-				style="z-index: 5; padding-top: 50px; padding-bottom: 0px;min-height: unset;">
-				<h5 style="color:#db3236;" align="center"></h5>
+				style="z-index: 5; padding-top: 20px; padding-bottom: 0px;min-height: unset;">
+				<h3 style="color:#db3236; text-align: center; font-size: 20px;">Student Registration Form</h3>
         </div>
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="card-body">
-                        <div class="row">
-                            <dx-popup
-                                [width]="800"
-                                [height]="400"
-                                [showTitle]="true"
-                                title="Student Registration"
-                                [dragEnabled]="false"
-                                [showCloseButton] = "false"
-                                [closeOnOutsideClick]="false"
-                                [(visible)]="studentRegistrationPopupVisible">
-                                <div class = "popupStyle" *dxTemplate="let data of 'content'">
-                                    <h4 class = "myfont">Register Here</h4>
+        <form [formGroup]="studentRegisterForm" (ngSubmit)="submit($event)">  
+
+            <div class="container-fluid">
+                <div class = "row">
+                    <div class="col-md-12">
+                        <div class = "card">
+                            <div class = "card-header">
+                                <span class = "card-title"></span>
+                                <h4 class = "cardHeading">Credentials Details</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class = "row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class = "myfont required">User Name</label> <input type="text"
+                                            class="form-control placeHolderFont" placeholder="Select a user name" 
+                                            formControlName="userName"  id="userName" required>
+                                    </div>
                                 </div>
-                            </dx-popup>
-                        </div>  
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Student OTP</label> <input type="text"
+                                            class="form-control placeHolderFont" placeholder="Student OTP" 
+                                            formControlName="studentOTP"  id="studentOTP" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Password</label> <input type="password"
+                                            class="form-control placeHolderFont" placeholder="Password" 
+                                            formControlName="password"  id="password" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Confirm Password</label> <input type="password"
+                                            class="form-control placeHolderFont" placeholder="Confirm Password" 
+                                            formControlName="confirmPassword"  id="confirmPassword" required>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class = "card">
+                            <div class = "card-header">
+                                <span class = "card-title"></span>
+                                <h4 class = "cardHeading">Personal Details</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class = "row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Student First Name</label> <input type="text"
+                                            class="form-control placeHolderFont" placeholder="Student First Name" 
+                                            formControlName="firstName"  id="firstName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Student Last Name</label> <input type="text"
+                                            class="form-control placeHolderFont" placeholder="Student Last Name" 
+                                            formControlName="lastName"  id="lastName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Student Phone Number</label> <input type="tel"
+                                            class="form-control placeHolderFont" placeholder="Whatsapp Number" 
+                                            formControlName="whatsappNumber"  id="whatsappNumber" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Father's Name</label> <input type="text"
+                                            class="form-control placeHolderFont" placeholder="Father's Name" 
+                                            formControlName="fatherName"  id="fatherName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Mother's Name</label> <input type="text"
+                                            class="form-control placeHolderFont" placeholder="Mother's Name" 
+                                            formControlName="motherName"  id="motherName" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Guardian Phone Number</label> <input type="tel"
+                                            class="form-control placeHolderFont" placeholder="Student First Name" 
+                                            formControlName="guardianPhoneNumber"  id="guardianPhoneNumber" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Email ID</label> <input type="email"
+                                            class="form-control placeHolderFont" placeholder="Email ID" 
+                                            formControlName="emailId"  id="emailId" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Age</label> <input type="number"
+                                            class="form-control placeHolderFont" placeholder="Age" 
+                                            formControlName="age"  id="age" required min="20" max="22">
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Date of Birth</label> <input type="date"
+                                            class="form-control placeHolderFont" placeholder="DOB as per Birth Certificate" 
+                                            formControlName="DOB"  id="DOB" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Gender</label>
+                                            <select class="form-control placeHolderFont" formControlName="gender"  id="gender"  placeholder="Select your Stream" 
+                                            required style = "height: 32px;">
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                                <option value="Others">Others</option>
+                                              </select>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Category</label> <input type="text"
+                                            class="form-control placeHolderFont" placeholder="Category" 
+                                            formControlName="category"  id="category" required>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">Alternate Phone Number</label> <input type="tel"
+                                            class="form-control placeHolderFont" placeholder="Alternate Phone Number" 
+                                            formControlName="alternatePhoneNumber"  id="alternatePhoneNumber" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont required">College Year</label> <input type="number"
+                                            class="form-control placeHolderFont" placeholder="College Year (1,2,3,4)"
+                                            id = "year" formControlName="collegeYear" id="collegeYear" (change)=isFirstYear() required
+                                            min="1" max="4">
+                                    </div>
+                                </div>
+                                <div *ngIf = "isFirstYear()" class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont">Fee Receipt Number</label> <input type="number"
+                                            class="form-control placeHolderFont" placeholder="Fee Receipt Number"
+                                            formControlName="feeReceiptNumber"  id="feeReceiptNumber" >
+                                    </div>
+                                </div>
+                                <div *ngIf = "!isFirstYear()" class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont">Student Enrollment Number</label> <input type="text"
+                                            class="form-control placeHolderFont" placeholder="Student Enrollment Number"
+                                            formControlName="enrollmentNumber"  id="enrollmentNumber" >
+                                    </div>
+                                </div>
+                               <!--  <div *ngIf = "collegeYear" class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont">Group Divisison</label> <input type="text"
+                                            class="form-control placeHolderFont" placeholder="Group Assigned" disabled
+                                            formControlName="groupDivision"  id="groupDivision" >
+                                    </div>
+                                </div> -->
+                            </div>
+                        </div>
+                        <div class = "card">
+                            <div class = "card-header">
+                                <span class = "card-title"></span>
+                                <h4 class = "cardHeading">Subject Details</h4>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class = "row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <div class="dx-fieldset">
+                                            <div class="dx-field">
+                                                <label class="dx-field-label myfont">Stream</label>
+                                                <div class="dx-field-value placeHolderFont">
+                                                    <dx-select-box #selectBox [dataSource]="stream"
+                                                        displayExpr="streamName" valueExpr="streamId"
+                                                        placeholder="Choose your Stream"
+                                                        formControlName="streamId" id="streamId"
+                                                        [value]="stream" 
+                                                        (change) ="getSubjectByStream(data.streamId)">
+                                                        <div *dxTemplate="let data of 'item'">
+                                                            <div class="form-control">
+                                                                <div class="form-control">
+                                                                    {{data.streamName}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </dx-select-box>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                                <div class = "row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                                <div class="dx-fieldset">
+                                                    <div class="dx-field">
+                                                        <label class="dx-field-label myfont">Subjects</label>
+                                                        <div class="dx-field-value placeHolderFont">
+                                                          <div *ngFor="let subject of subjects; index as i;">
+                                                            <input class="dx-field-value placeHolderFont" type="checkbox" 
+                                                                name="subject{{subject.subjectName}}" [checked]="subjects[i].checked" 
+                                                                (change)="subjects[i].checked= !subjects[i].checked"
+                                                                formControlName="subjectId"  id="subjectId" >
+                                                            <label class="dx-field-label myfont" for="subject{{subject.subjecId}}">{{subject.subjectName}} {{subject.checked}}</label>
+                                                            <br/>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            <br>
+                            <div class="col-md-12 text-center">
+                                    <button type="submit" class="btn btn-info btn-fill" >Submit</button>&nbsp; &nbsp;
+                                    
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+
+        </form>
     </div>
 </div>
-<dx-load-panel shadingColor = "rgba(0,0,0,0.4)"  [showIndicator] = "true" [(visible)] = "loadingVisible"
-                [shading] = "true" [closeOnOutsideClick] = "false">
-               <!-- [showPanel] = "true"  -->
-</dx-load-panel>

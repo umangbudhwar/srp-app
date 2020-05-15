@@ -33,9 +33,15 @@ import { JwtInterceptorService } from './shared/common/jwt-interceptor';
 import { ErrorsHandler } from './shared/common/errors-handler';
 import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { DxDataGridModule, DxLoadPanelModule,DxPopupModule,DxTreeListModule,DxLoadIndicatorModule, DxButtonModule }  from 'devextreme-angular/';
+import { DxSelectBoxModule,
+  DxTextBoxModule,
+  DxTemplateModule } from 'devextreme-angular';
 import { RegisterStudentComponent } from './register-student/register-student.component';
 import { HomeComponent } from './home/home.component';
 import { FacultyManagementServiceService } from './shared/service/faculty-management-service.service';
+import { StudentManagementService } from './shared/service/student-management.service';
+import { StreamService } from './shared/common/stream-service';
+import { SubjectService } from './shared/common/subject-service';
 
 @NgModule({
   declarations: [
@@ -70,9 +76,11 @@ import { FacultyManagementServiceService } from './shared/service/faculty-manage
     MatToolbarModule ,FormsModule,ReactiveFormsModule ,DxDataGridModule,DxLoadIndicatorModule,
     DxLoadPanelModule,DxButtonModule,
     DxPopupModule,
-    DxTreeListModule,
+    DxTreeListModule, DxSelectBoxModule,
+    DxTextBoxModule,
+    DxTemplateModule
   ],
-  providers: [FacultyManagementServiceService,AuthenticationService,{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true},
+  providers: [SubjectService,StreamService,StudentManagementService, FacultyManagementServiceService,AuthenticationService,{provide: HTTP_INTERCEPTORS, useClass: JwtInterceptorService, multi: true},
     ErrorsHandler,
   {
     provide: ErrorHandler,useClass: ErrorsHandler,

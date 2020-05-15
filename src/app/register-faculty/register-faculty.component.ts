@@ -5,6 +5,8 @@ import notify from 'devextreme/ui/notify';
 import { FacultyManagementServiceService } from '../shared/service/faculty-management-service.service';
 import { ErrorsHandler } from '../shared/common/errors-handler';
 import { Router } from '@angular/router';
+import { Stream } from '../shared/model/streams';
+import { StreamService } from '../shared/common/stream-service';
 
 @Component({
   selector: 'app-register-faculty',
@@ -17,16 +19,24 @@ export class RegisterFacultyComponent implements OnInit {
   loadingVisible: boolean = true;
   checkoutForm: FormGroup = new FormGroup({});
   items: any;
+  stream: Stream[];
+  streamId: number;
 
   constructor(private formBuilder: FormBuilder, 
               private facultyService: FacultyManagementServiceService,
               private errorHandler: ErrorsHandler,
-              private router: Router) {
+              private router: Router,
+              private streamService: StreamService,) {
 
     }
 
   ngOnInit(): void {
     this.showInfo();
+
+    this.streamService.getStreams().subscribe(data => {
+      this.stream = data;
+    });
+
     this.checkoutForm = this.formBuilder.group({
       emailId: [null,Validators.required],
       userName: [null,Validators.required], // userId
@@ -34,6 +44,7 @@ export class RegisterFacultyComponent implements OnInit {
       lastName: [null,Validators.required],
       contactNumber: [null,Validators.required],
       adminOTP: [null,Validators.required],
+      streamId: [null, Validators.required],
       password: [null,Validators.required],
       confirmPassword: [null,Validators.required]
     },
@@ -57,11 +68,14 @@ export class RegisterFacultyComponent implements OnInit {
   {
     let faculty: Faculty = this.checkoutForm.value;
     console.log('registerFaculty called');
+
+    this.stream.forEach ((streamElement) => {
+      this.streamId = streamElement.id ;
+    });
+
     this.facultyService.registerFaculty(faculty)
     .subscribe(data => {
       notify('Faculty added successfully','success',4000);
-      //this.items = '';
-      //this.checkoutForm.reset();
       this.router.navigate(['/login']);
     },
     error =>{

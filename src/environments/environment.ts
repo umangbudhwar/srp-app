@@ -9,6 +9,8 @@ const userUrl = {
   authenticate: baseUrl + apiContext + '/authenticate',
   registerFaculty: baseUrl + apiContext + '/faculty/registerFaculty',
   registerStudent: baseUrl + apiContext + '/student/registerStudent',
+  getStreams: baseUrl + apiContext + '/stream/getStreams',
+  getSubjects: baseUrl + apiContext + '/subject/getSubjects',
 }
 
 const apiUrl = {

@@ -13,7 +13,7 @@ export class ErrorsHandler implements ErrorHandler{
           //server error occured
           if(!navigator.onLine){
               // handle offline error
-              console.log(error);
+              // console.log(error);
               notify('No Internet Connection','error',4000);
           }
           else{
@@ -30,11 +30,11 @@ export class ErrorsHandler implements ErrorHandler{
         }
         else{
           // handle client error
-          console.log(error);
+          // console.log(error);
           notify(error.message,'error',4000);
         }
         //log the error anyway
-        console.log(error);
+        // console.log(error);
       }
     
 }

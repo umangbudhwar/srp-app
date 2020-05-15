@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "srp-app"
+  "defaultProject": "srp-app",
+  "cli": {
+    "analytics": false
+  }
 }

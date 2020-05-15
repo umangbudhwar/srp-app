@@ -6,10 +6,12 @@ import { RegisterFacultyComponent } from './register-faculty/register-faculty.co
 import { RegisterStudentComponent } from './register-student/register-student.component';
 import { HomeComponent } from './home/home.component';
 import { AuthGuardService } from './shared/common/auth-guard';
+import { LogoutComponent } from './logout/logout.component';
 
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'logout', component: LogoutComponent },
   { path: '', component: PopupComponent },
   { path: 'home', component: HomeComponent},
   { path: 'registerFaculty', component: RegisterFacultyComponent },

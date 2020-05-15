@@ -9,4 +9,5 @@ export class Faculty{
     contactNumber: number;
     adminOTP: number;
     password: number;
+    streamId: number;
 }
