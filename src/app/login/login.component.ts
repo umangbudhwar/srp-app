@@ -30,12 +30,15 @@ export class LoginComponent implements OnInit {
   }
 
   checkLogin() {
+    this.loadingVisible = true;
     (this.loginservice.authenticateLogin(this.userName, this.password).subscribe(
-      data => {
+      (data) => {
+        this.loadingVisible = false;
         this.router.navigate(['/home']);
         this.invalidLogin = false;
       },
-      error => {
+      (error) => {
+        this.loadingVisible = false;
         this.invalidLogin = true;
         this.errorHandler.handleError(error);
       }

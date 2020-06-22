@@ -1,7 +1,7 @@
 export class Subject{
 
-	 subjecId:number;
-	 subjectName: string;
+	 subjectId:number;
+	 subjectName: String;
 	 checked?: boolean;
 	 streamId: number;
 }

@@ -11,6 +11,7 @@ export class PopupComponent implements OnInit {
   popupVisible: boolean = false;
   loadingVisible: boolean = true;
   facultyPopupVisible: boolean = false;
+  studentPopupVisible: boolean = false;
   
   constructor(private router: Router) { }
 
@@ -23,24 +24,12 @@ export class PopupComponent implements OnInit {
     this.loadingVisible = false;
 }
 callFaculty() {
-  // console.log('Faculty login called');
+  this.popupVisible = false;
   this.facultyPopupVisible = true;
  
 }
-/* callStudent() {
-  console.log('Student login called');
-  //this.studentPopupVisible = true;
-  this.router.navigate(['/login']);
+callStudent(){
+  this.popupVisible = false;
+  this.studentPopupVisible = true;
 }
-facultyRegistration(){
-  console.log('facultyRegistration called');
-  this.router.navigate(['/registerFaculty']);
-  
-}
-
-facultyLogin(){
-  console.log('facultyLogin called');
-  //this.facultyLoginPopupVisible = true;
-  this.router.navigate(['/login']);
-} */
 }

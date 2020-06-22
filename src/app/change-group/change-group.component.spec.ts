@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FacultyManagementComponent } from './faculty-management.component';
+import { ChangeGroupComponent } from './change-group.component';
 
-describe('FacultyManagementComponent', () => {
-  let component: FacultyManagementComponent;
-  let fixture: ComponentFixture<FacultyManagementComponent>;
+describe('ChangeGroupComponent', () => {
+  let component: ChangeGroupComponent;
+  let fixture: ComponentFixture<ChangeGroupComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FacultyManagementComponent ]
+      declarations: [ ChangeGroupComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FacultyManagementComponent);
+    fixture = TestBed.createComponent(ChangeGroupComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

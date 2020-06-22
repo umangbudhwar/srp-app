@@ -63,3 +63,12 @@
 ::ng-deep .dx-theme-material .dx-selectbox-container .product-name {
     padding-left: 58px;
 }
+.alert{
+    position: relative;
+    padding: 5px 5px 5px 5px;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+    font-size: 12px;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}

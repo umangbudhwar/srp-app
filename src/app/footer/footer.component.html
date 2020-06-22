@@ -1,13 +1,14 @@
-<footer class="footer footerStyle">
-    <div class="container-fluid">
-    <nav>
-            <p class="copyright text-center">
-                ©
-                <script>
-                  document.write(new Date().getFullYear())
-                </script>
-                Footer
-            </p>
-        </nav>
-    </div>
-</footer>
+<div style = "padding-top: 110px;">
+    <footer class="footer footerStyle">
+        <div class="container-fluid">
+        <nav>
+                <p class="footer-copyright text-center py-3">
+                   <!--   ©  -->
+                   {{dateYear}} &nbsp;
+                   {{message}} &nbsp;
+                  <a href = "https://www.linkedin.com/in/umangbudhwar">{{name}}</a>
+                </p>
+            </nav>
+        </div>
+    </footer>
+</div>

@@ -17,7 +17,7 @@ export class ErrorsHandler implements ErrorHandler{
               notify('No Internet Connection','error',4000);
           }
           else{
-            console.log(error);
+           // console.log(error);
             notify(error.error.message,'error',4000);
             if(!error.error.message){
               const router = this.injector.get(Router);
@@ -34,7 +34,7 @@ export class ErrorsHandler implements ErrorHandler{
           notify(error.message,'error',4000);
         }
         //log the error anyway
-        // console.log(error);
+       // console.log(error);
       }
     
 }

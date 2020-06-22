@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 
+  name:String;
+  message: String;
+  dateYear: number;
   constructor() { }
 
   ngOnInit(): void {
+    this.message = 'Iswar Saran PG College ||  Made By';
+    this.name = 'Umang Budhwar';
+    this.dateYear = new Date().getFullYear();
   }
 
 }

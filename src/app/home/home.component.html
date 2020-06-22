@@ -1,0 +1,45 @@
+<div class="wrapper">
+    <div class="main-panel">
+        <div class="content"
+				style="z-index: 5; padding-top: 20px; padding-bottom: 0px;min-height: unset;">
+				<h3 style="color:#db3236; text-align: center; font-size: 20px;"></h3>
+        </div>
+        <!-- <router-outlet></router-outlet> -->
+        <div class="container-fluid">
+            <div class = "row">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <div class = "row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                   <ul class = "list-unstyled myfont">
+                                       <li>
+                                            <a class = "myfont" routerLink="dashboards" routerLinkActive="active">Fetch Reports</a>
+                                        </li>
+                                       <br>
+                                       <li>
+                                            <a class = "myfont" routerLink="assignGroup" routerLinkActive="active">Batch Group Division</a>
+                                       </li>
+                                       <br>
+                                       <li>
+                                            <a class = "myfont" routerLink="changeGroup" routerLinkActive="active">Change Group</a>
+                                       </li>
+                                       <br>
+                                       <li>
+                                            <a class = "myfont" routerLink="logout" routerLinkActive="active">Logout</a>
+                                       </li>
+                                   </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<dx-load-panel shadingColor = "rgba(0,0,0,0.4)"  [showIndicator] = "true" [(visible)] = "loadingVisible"
+                [shading] = "true" [closeOnOutsideClick] = "false">
+               <!-- [showPanel] = "true"  -->
+</dx-load-panel>

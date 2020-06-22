@@ -18,57 +18,115 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="myfont required">Faculty First Name</label> <input
+														<label class="myfont required">Faculty First Name</label> <!-- <input
 															type="text" class="form-control placeHolderFont"
 															placeholder="Faculty First Name" formControlName="firstName"
-															required>
+															required> -->
+															<dx-text-box class="form-control placeHolderFont" placeholder="Faculty First Name" 
+                                                         				 formControlName="firstName"  id="firstName">
+															<dx-validator>
+																<dxi-validation-rule type="required" message="Name is required"></dxi-validation-rule>
+																<dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+																<dxi-validation-rule type="stringLength" [min]="2" message="Name must have at least 2 characters"></dxi-validation-rule>
+															</dx-validator>
+														</dx-text-box>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="myfont required">Faculty Last Name</label> <input
+														<label class="myfont required">Faculty Last Name</label> <!-- <input
 															type="text" class="form-control placeHolderFont"
 															placeholder="Faculty Last Name" formControlName="lastName"
-															required>
+															required> -->
+															<dx-text-box class="form-control placeHolderFont" placeholder="Faculty Last Name" 
+                                                         				 formControlName="lastName"  id="lastName">
+															<dx-validator>
+																<dxi-validation-rule type="required" message="Last Name is required"></dxi-validation-rule>
+																<dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+																<dxi-validation-rule type="stringLength" [min]="2" message="Last Name must have at least 2 characters"></dxi-validation-rule>
+															</dx-validator>
+														</dx-text-box>
 													</div>
 												</div>
 											</div>
 											<div class="row"> </div>
 											<div class="row">
 												<div class="col-md-6">
-													<div class="form-group">
+													<!-- <div class="form-group">
 														<label class="myfont required">Email ID</label> <input
 															type="email" class="form-control placeHolderFont"
 															placeholder="Email ID" required formControlName="emailId"
 															pattern="^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$">
+													</div> -->
+													<div class="form-group">
+														<label class = "myfont">Email ID</label> 
+															<dx-text-box class="form-control placeHolderFont" formControlName="emailId"  id="emailId"
+																		 placeholder="Email ID"> 
+																<dx-validator>
+																	<dxi-validation-rule type="required" message="Email is required"></dxi-validation-rule>
+																	<dxi-validation-rule type="email" message="Email is invalid"></dxi-validation-rule>
+																</dx-validator>
+															</dx-text-box>
 													</div>
 												</div>
 
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="myfont required">Contact Number</label> <input
+														<label class="myfont required">Contact Number</label> <!-- <input
 															type="number" class="form-control placeHolderFont"
 															placeholder="Contact Number" maxlength="10"
 															pattern="[0-9]{10}" formControlName="contactNumber"
-															required>
+															required> -->
+															<dx-text-box class="form-control placeHolderFont" placeholder="Phone Number" 
+																		 formControlName="contactNumber"  id="contactNumber"> 
+															<dx-validator  name="Phone number">
+																<dxi-validation-rule type="required" message = "Phone Number is required."></dxi-validation-rule>
+																<dxi-validation-rule type="pattern" [pattern]="phonePattern"></dxi-validation-rule>
+															</dx-validator>
+														</dx-text-box>
 													</div>
 												</div>
 											</div>
 											<div class="row"> </div>
 											<div class="row">
 												<div class="col-md-6">
-													<div class="form-group">
+													<!-- <div class="form-group">
 														<label class="myfont required">Faculty UserName</label> <input
 															type="text" class="form-control placeHolderFont"
 															placeholder="Select a UserName" formControlName="userName"
 															required>
+													</div> -->
+													<div class="form-group">
+														<label class = "myfont">User Name</label> 
+															<dx-text-box class="form-control placeHolderFont" 
+																		 placeholder="Select a user name" 
+																		 formControlName="userName"  id="userName"
+																		 >
+																<dx-validator>
+																	<dxi-validation-rule type="required" message="User Name is required"></dxi-validation-rule>
+																	<dxi-validation-rule type="stringLength" [min]="4" message="User Name must have at least 4 characters"></dxi-validation-rule>
+																</dx-validator>
+															</dx-text-box>
+															<div *ngIf="checkoutForm.controls['userName'].invalid && checkoutForm.controls['userName'].touched" 
+																 class = "alert alert-danger" style = "margin-top: 3px;">
+																<div *ngIf = "checkoutForm.controls['userName'].errors.userNameExists">User Name already exist.</div>
+															</div>
 													</div>
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
-														<label class="myfont required">Admin OTP</label> <input
+														<label class="myfont required">Admin OTP</label> <!-- <input
 															type="number" class="form-control placeHolderFont"
-															placeholder="Admin OTP" formControlName="adminOTP" required>
+															placeholder="Admin OTP" formControlName="adminOTP" required> -->
+															<dx-text-box class="form-control placeHolderFont" 
+																		 placeholder="Faculty OTP" 
+																	     formControlName="adminOTP"  id="adminOTP">
+															<dx-validator>
+																<dxi-validation-rule type="required" message="OTP is required"></dxi-validation-rule>
+																<dxi-validation-rule type="numeric" message="OTP must contain only numbers"></dxi-validation-rule>
+																<dxi-validation-rule type="stringLength" [min]="6" [max] = "6" message="OTP must be of 6 digits"></dxi-validation-rule>
+															</dx-validator>
+														</dx-text-box>
 													</div>
 												</div>
 											</div>
@@ -77,18 +135,37 @@
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="myfont required">Password</label>
-														<input type="password" class="form-control placeHolderFont"
+														<!-- <input type="password" class="form-control placeHolderFont"
 															placeholder="Password" formControlName="password"
-															id="password" required>
+															id="password" required> -->
+															<dx-text-box class="form-control placeHolderFont" placeholder="Password" 
+																			formControlName="password"  id="password"
+																			mode="password"
+																			[(value)]="password">
+																		<dx-validator>
+																			<dxi-validation-rule type="required" message="Password is required"></dxi-validation-rule>
+																			<dxi-validation-rule type="stringLength" [min]="6" message="Password must be atleast 6 character long."></dxi-validation-rule>
+																			<dxi-validation-rule type="stringLength" [max]="30" message="Password cannot be greater than 30 characters"></dxi-validation-rule>
+																		</dx-validator>
+															</dx-text-box>
 													</div>
 
 												</div>
 												<div class="col-md-6">
 													<div class="form-group">
 														<label class="myfont required">Confirm Password</label>
-														<input type="password" class="form-control placeHolderFont"
+														<!-- <input type="password" class="form-control placeHolderFont"
 															placeholder="Confirm Password" id="confirmPassword"
-															required>
+															required> -->
+															<dx-text-box mode="password" class="form-control placeHolderFont" 
+                                                         placeholder="Confirm Password" 
+                                                         formControlName="confirmPassword"  id="confirmPassword">
+															<dx-validator>
+																<dxi-validation-rule type="required" message="Confirm Password is required"></dxi-validation-rule>
+																<dxi-validation-rule type="compare" [comparisonTarget]="passwordComparison"
+																	message="Password and Confirm Password do not match"></dxi-validation-rule>
+															</dx-validator>
+														</dx-text-box>
 
 													</div>
 												</div>
@@ -112,8 +189,10 @@
 																				</div>
 																			</div>
 																		</div>
+																		<dx-validator>
+																			<dxi-validation-rule type="required" message="Stream is required"></dxi-validation-rule>
+																		</dx-validator>
 																	</dx-select-box>
-																	<!-- [value]="stream[0]" -->
 																</div>
 															</div>
 														</div>
@@ -122,8 +201,15 @@
 											</div>
 											<br>
 											<div class="col-md-12 text-center">
-												<button type="submit"
-													class="btn btn-info btn-fill">Submit</button>&nbsp; &nbsp;
+												<dx-validation-summary id="summary"></dx-validation-summary>
+												<dx-button class="btn btn-info btn-fill"
+													id="button"
+													text="Register"
+													type="success"  
+													[useSubmitBehavior]="true">
+												</dx-button>
+												<!-- <button type="submit"
+													class="btn btn-info btn-fill">Submit</button>&nbsp; &nbsp; -->
 												<!-- <button  class="btn btn-info btn-fill ">Cancel</button> -->
 											</div>
 										</div>

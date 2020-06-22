@@ -1,4 +1,4 @@
-export class Stream{
+export class Streams{
     
     id: number;
     streamName: string;

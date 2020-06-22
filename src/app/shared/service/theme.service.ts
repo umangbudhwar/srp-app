@@ -13,6 +13,6 @@ export class ThemeService {
   setDarkTheme(isDarkTheme : boolean)
   {
     this._darkTheme.next(isDarkTheme);
-    console.log(isDarkTheme);
+   // console.log(isDarkTheme);
   }
 }

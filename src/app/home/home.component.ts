@@ -7,9 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  loadingVisible:boolean = true;
   constructor() { }
 
   ngOnInit(): void {
+    this.loadingVisible =false;
   }
 
 }

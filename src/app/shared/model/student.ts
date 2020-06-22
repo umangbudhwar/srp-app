@@ -5,7 +5,7 @@ export class Student{
 	 firstName: String;
 	 lastName: String;
 	 emailId: String;
-	 DOB: String;
+	 dateOfBirth: String;
 	 age: String;
 	 feeReceiptNumber: number;
 	 enrollmentNumber: String;
@@ -19,6 +19,8 @@ export class Student{
 	 category: String;
 	 streamId: number;
 	 subjectId: number[];
+	 streamName: String;
+	 subjectName:  String[];
 	 groupDivision: String;
      studentCode: String;
 	 studentOTP: number;

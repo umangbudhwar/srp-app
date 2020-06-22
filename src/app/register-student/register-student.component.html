@@ -4,7 +4,7 @@
 				style="z-index: 5; padding-top: 20px; padding-bottom: 0px;min-height: unset;">
 				<h3 style="color:#db3236; text-align: center; font-size: 20px;">Student Registration Form</h3>
         </div>
-        <form [formGroup]="studentRegisterForm" (ngSubmit)="submit($event)">  
+        <form [formGroup]="studentRegisterForm" (ngSubmit)="submit($event)" novalidate>  
 
             <div class="container-fluid">
                 <div class = "row">
@@ -19,32 +19,65 @@
                             <div class = "row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class = "myfont required">User Name</label> <input type="text"
-                                            class="form-control placeHolderFont" placeholder="Select a user name" 
-                                            formControlName="userName"  id="userName" required>
+                                        <label class = "myfont">User Name</label> 
+                                            <dx-text-box class="form-control placeHolderFont" 
+                                                         placeholder="Select a user name" 
+                                                         formControlName="userName"  id="userName"
+                                                         >
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="User Name is required"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="stringLength" [min]="4" message="User Name must have at least 4 characters"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
+                                            <div *ngIf="studentRegisterForm.controls['userName'].invalid && studentRegisterForm.controls['userName'].touched" 
+                                                 class = "alert alert-danger" style = "margin-top: 3px;">
+                                                <div *ngIf = "studentRegisterForm.controls['userName'].errors.userNameExists">User Name already exist.</div>
+                                            </div>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class = "myfont required">Student OTP</label> <input type="text"
-                                            class="form-control placeHolderFont" placeholder="Student OTP" 
-                                            formControlName="studentOTP"  id="studentOTP" required>
+                                        <label class = "myfont">Student OTP</label>
+                                            <dx-text-box class="form-control placeHolderFont" 
+                                                         placeholder="Student OTP" 
+                                                         formControlName="studentOTP"  id="studentOTP">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="OTP is required"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="numeric" message="OTP must contain only numbers"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="stringLength" [min]="6" [max] = "6" message="OTP must be of 6 digits"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                             </div>
                             <div class = "row">
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class = "myfont required">Password</label> <input type="password"
-                                            class="form-control placeHolderFont" placeholder="Password" 
-                                            formControlName="password"  id="password" required>
+                                        <label class = "myfont">Password</label>
+                                            <dx-text-box class="form-control placeHolderFont" placeholder="Password" 
+                                                         formControlName="password"  id="password"
+                                                         mode="password"
+                                                         [(value)]="password">
+                                                        <dx-validator>
+                                                            <dxi-validation-rule type="required" message="Password is required"></dxi-validation-rule>
+                                                            <dxi-validation-rule type="stringLength" [min]="6" message="Password must be atleast 6 character long."></dxi-validation-rule>
+                                                            <dxi-validation-rule type="stringLength" [max]="30" message="Password cannot be greater than 30 characters"></dxi-validation-rule>
+                                                        </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class = "myfont required">Confirm Password</label> <input type="password"
-                                            class="form-control placeHolderFont" placeholder="Confirm Password" 
-                                            formControlName="confirmPassword"  id="confirmPassword" required>
+                                        <label class = "myfont">Confirm Password</label>
+                                            <dx-text-box mode="password" class="form-control placeHolderFont" 
+                                                         placeholder="Confirm Password" 
+                                                         formControlName="confirmPassword"  id="confirmPassword">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="Confirm Password is required"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="compare" [comparisonTarget]="passwordComparison"
+                                                        message="Password and Confirm Password do not match"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                             </div>
@@ -59,129 +92,201 @@
                             <div class = "row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class = "myfont required">Student First Name</label> <input type="text"
-                                            class="form-control placeHolderFont" placeholder="Student First Name" 
-                                            formControlName="firstName"  id="firstName" required>
+                                        <label class = "myfont">Student First Name</label>
+                                            <dx-text-box class="form-control placeHolderFont" placeholder="Student First Name" 
+                                                         formControlName="firstName"  id="firstName">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="Name is required"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="stringLength" [min]="2" message="Name must have at least 2 characters"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class = "myfont required">Student Last Name</label> <input type="text"
-                                            class="form-control placeHolderFont" placeholder="Student Last Name" 
-                                            formControlName="lastName"  id="lastName" required>
+                                        <label class = "myfont">Student Last Name</label>
+                                            <dx-text-box class="form-control placeHolderFont" placeholder="Student Last Name" 
+                                                         formControlName="lastName"  id="lastName">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="Last Name is required"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="stringLength" [min]="2" message="Last Name must have at least 2 characters"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class = "myfont required">Student Phone Number</label> <input type="tel"
-                                            class="form-control placeHolderFont" placeholder="Whatsapp Number" 
-                                            formControlName="whatsappNumber"  id="whatsappNumber" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class = "row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class = "myfont required">Father's Name</label> <input type="text"
-                                            class="form-control placeHolderFont" placeholder="Father's Name" 
-                                            formControlName="fatherName"  id="fatherName" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class = "myfont required">Mother's Name</label> <input type="text"
-                                            class="form-control placeHolderFont" placeholder="Mother's Name" 
-                                            formControlName="motherName"  id="motherName" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class = "myfont required">Guardian Phone Number</label> <input type="tel"
-                                            class="form-control placeHolderFont" placeholder="Student First Name" 
-                                            formControlName="guardianPhoneNumber"  id="guardianPhoneNumber" required>
+                                        <label class = "myfont">Student Phone Number</label>
+                                            <dx-text-box class="form-control placeHolderFont" placeholder="Whatsapp Number" 
+                                                         formControlName="whatsappNumber"  id="whatsappNumber"> 
+                                                        <dx-validator  name="Phone number">
+                                                            <dxi-validation-rule type="required" message = "Phone Number is required."></dxi-validation-rule>
+                                                            <dxi-validation-rule type="pattern" [pattern]="phonePattern" message = "Phone number must be a valid number"></dxi-validation-rule>
+                                                            <dxi-validation-rule type="numeric" message = "Phone number must be numeric value"></dxi-validation-rule>
+                                                        </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                             </div>
                             <div class = "row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class = "myfont required">Email ID</label> <input type="email"
-                                            class="form-control placeHolderFont" placeholder="Email ID" 
-                                            formControlName="emailId"  id="emailId" required>
+                                        <label class = "myfont">Father's Name</label>
+                                            <dx-text-box class="form-control placeHolderFont" placeholder="Father's Name" 
+                                                         formControlName="fatherName"  id="fatherName">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="Father's Name is required"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="stringLength" [min]="2" message="Last Name must have at least 2 characters"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class = "myfont required">Age</label> <input type="number"
-                                            class="form-control placeHolderFont" placeholder="Age" 
-                                            formControlName="age"  id="age" required min="20" max="22">
+                                        <label class = "myfont">Mother's Name</label> 
+                                            <dx-text-box class="form-control placeHolderFont" placeholder="Mother's Name" 
+                                                         formControlName="motherName"  id="motherName">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="Mother's Name is required"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="stringLength" [min]="2" message="Last Name must have at least 2 characters"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class = "myfont required">Date of Birth</label> <input type="date"
-                                            class="form-control placeHolderFont" placeholder="DOB as per Birth Certificate" 
-                                            formControlName="DOB"  id="DOB" required>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class = "row">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class = "myfont required">Gender</label>
-                                            <select class="form-control placeHolderFont" formControlName="gender"  id="gender"  placeholder="Select your Stream" 
-                                            required style = "height: 32px;">
-                                                <option value="Male">Male</option>
-                                                <option value="Female">Female</option>
-                                                <option value="Others">Others</option>
-                                              </select>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class = "myfont required">Category</label> <input type="text"
-                                            class="form-control placeHolderFont" placeholder="Category" 
-                                            formControlName="category"  id="category" required>
-                                    </div>
-                                </div>
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        <label class = "myfont required">Alternate Phone Number</label> <input type="tel"
-                                            class="form-control placeHolderFont" placeholder="Alternate Phone Number" 
-                                            formControlName="alternatePhoneNumber"  id="alternatePhoneNumber" required>
+                                        <label class = "myfont">Guardian Phone Number</label>
+                                            <dx-text-box class="form-control placeHolderFont" placeholder="Guardian Phone Number" 
+                                                         formControlName="guardianPhoneNumber"  id="guardianPhoneNumber"> 
+                                                <dx-validator  name="Phone number">
+                                                    <dxi-validation-rule type="required" message = "Guardian Phone Number is required."></dxi-validation-rule>
+                                                    <dxi-validation-rule type="pattern" [pattern]="phonePattern"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                             </div>
                             <div class = "row">
                                 <div class="col-md-4">
                                     <div class="form-group">
-                                        <label class = "myfont required">College Year</label> <input type="number"
-                                            class="form-control placeHolderFont" placeholder="College Year (1,2,3,4)"
-                                            id = "year" formControlName="collegeYear" id="collegeYear" (change)=isFirstYear() required
-                                            min="1" max="4">
+                                        <label class = "myfont">Email ID</label> 
+                                            <dx-text-box class="form-control placeHolderFont" formControlName="emailId"  id="emailId"
+                                                         placeholder="Email ID"> 
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="Email is required"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="email" message="Email is invalid"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont">Date of Birth</label>
+                                            <dx-date-box class="form-control placeHolderFont" placeholder="DOB as per Birth Certificate" 
+                                                         formControlName="dateOfBirth"  id="dateOfBirth" 
+                                                         valueChangeEvent = "focusout"
+                                                         (onValueChanged)="ageFromDateOfBirthday($event)"
+                                                         invalidDateMessage="The date must have the following format: MM/dd/yyyy">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="Date of birth is required"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-date-box>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont">Age</label>
+                                            <dx-text-box class="form-control placeHolderFont" placeholder="Age" 
+                                                         formControlName="age"  id="age" 
+                                                         [value] = "calculateAge"
+                                                         [readOnly]="true">
+                                            </dx-text-box>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont">Gender</label>
+                                              <dx-select-box class="form-control placeHolderFont" formControlName="gender"  id="gender" 
+                                                    [dataSource]="genderOptions"
+                                                    placeholder="Gender"
+                                                    [showClearButton]="false">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Gender is required"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-select-box>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont">Category</label>
+                                              <dx-select-box class="form-control placeHolderFont" formControlName="category"  id="category" 
+                                                    [dataSource]="categoryOptions"
+                                                    placeholder="Category"
+                                                    [showClearButton]="false">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Category is required"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-select-box>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont">Alternate Phone Number</label><i class="placeHolderFont">(Optional)</i>
+                                            <dx-text-box class="form-control placeHolderFont" placeholder="Alternate Phone Number" 
+                                                         formControlName="alternatePhoneNumber"  id="alternatePhoneNumber"> 
+                                                <dx-validator  name="Phone number">
+                                                    <dxi-validation-rule type="pattern" [pattern]="phonePattern"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "row">
+                                <div class="col-md-4">
+                                    <div class="form-group">
+                                        <label class = "myfont">College Year</label>
+                                            <dx-text-box class="form-control placeHolderFont" 
+                                                         placeholder="College Year (1,2,3,4)"
+                                                         formControlName="collegeYear" 
+                                                         id="collegeYear" (change)=isFirstYear()>
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="College year is required"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                                 <div *ngIf = "isFirstYear()" class="col-md-4">
                                     <div class="form-group">
-                                        <label class = "myfont">Fee Receipt Number</label> <input type="number"
-                                            class="form-control placeHolderFont" placeholder="Fee Receipt Number"
-                                            formControlName="feeReceiptNumber"  id="feeReceiptNumber" >
+                                        <label class = "myfont">Fee Receipt Number</label>
+                                            <dx-text-box class="form-control placeHolderFont" 
+                                                         placeholder="Fee Receipt Number"
+                                                         formControlName="feeReceiptNumber" id="feeReceiptNumber">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="Fee Receipt Number is required"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="numeric"  message="Fee Receipt Number must be a numeric value."></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
                                 <div *ngIf = "!isFirstYear()" class="col-md-4">
                                     <div class="form-group">
-                                        <label class = "myfont">Student Enrollment Number</label> <input type="text"
-                                            class="form-control placeHolderFont" placeholder="Student Enrollment Number"
-                                            formControlName="enrollmentNumber"  id="enrollmentNumber" >
+                                        <label class = "myfont">Student Enrollment Number</label>
+                                            <dx-text-box class="form-control placeHolderFont" 
+                                                         placeholder="Student Enrollment Number"
+                                                         formControlName="enrollmentNumber"  id="enrollmentNumber">
+                                                <dx-validator>
+                                                    <dxi-validation-rule type="required" message="Student Enrollment Number is required"></dxi-validation-rule>
+                                                </dx-validator>
+                                            </dx-text-box>
                                     </div>
                                 </div>
-                               <!--  <div *ngIf = "collegeYear" class="col-md-4">
-                                    <div class="form-group">
-                                        <label class = "myfont">Group Divisison</label> <input type="text"
-                                            class="form-control placeHolderFont" placeholder="Group Assigned" disabled
-                                            formControlName="groupDivision"  id="groupDivision" >
-                                    </div>
-                                </div> -->
                             </div>
                         </div>
                         <div class = "card">
@@ -198,19 +303,19 @@
                                             <div class="dx-field">
                                                 <label class="dx-field-label myfont">Stream</label>
                                                 <div class="dx-field-value placeHolderFont">
-                                                    <dx-select-box #selectBox [dataSource]="stream"
-                                                        displayExpr="streamName" valueExpr="streamId"
-                                                        placeholder="Choose your Stream"
-                                                        formControlName="streamId" id="streamId"
-                                                        [value]="stream" 
-                                                        (change) ="getSubjectByStream(data.streamId)">
-                                                        <div *dxTemplate="let data of 'item'">
-                                                            <div class="form-control">
-                                                                <div class="form-control">
+                                                    <dx-select-box #selectBox [dataSource]="streams"
+                                                                displayExpr="streamName" valueExpr="streamId"
+                                                                class="placeHolderFont"
+                                                                placeholder="Choose your Stream"
+                                                                formControlName="streamId" id="streamId"
+                                                                [value]="streams" 
+                                                                (onValueChanged)="onStreamSelectChange($event)">
+                                                                <div *dxTemplate="let data of 'item'">
                                                                     {{data.streamName}}
                                                                 </div>
-                                                            </div>
-                                                        </div>
+                                                                <dx-validator>
+                                                                    <dxi-validation-rule type="required" message="Stream is required"></dxi-validation-rule>
+                                                                </dx-validator>
                                                     </dx-select-box>
                                                 </div>
                                             </div>
@@ -221,34 +326,69 @@
                                 <div class = "row">
                                     <div class="col-md-6">
                                         <div class="form-group">
-                                                <div class="dx-fieldset">
-                                                    <div class="dx-field">
-                                                        <label class="dx-field-label myfont">Subjects</label>
-                                                        <div class="dx-field-value placeHolderFont">
-                                                          <div *ngFor="let subject of subjects; index as i;">
-                                                            <input class="dx-field-value placeHolderFont" type="checkbox" 
-                                                                name="subject{{subject.subjectName}}" [checked]="subjects[i].checked" 
-                                                                (change)="subjects[i].checked= !subjects[i].checked"
-                                                                formControlName="subjectId"  id="subjectId" >
-                                                            <label class="dx-field-label myfont" for="subject{{subject.subjecId}}">{{subject.subjectName}} {{subject.checked}}</label>
-                                                            <br/>
-                                                        </div>
+                                            <div class="dx-fieldset">
+                                                <div class="dx-field">
+                                                    <label class="dx-field-label myfont">Subjects</label>
+                                                    <div class="dx-field-value placeHolderFont" style="line-height: 22px;">
+                                                        <div *ngFor="let subject of selectedStreamSubjects; index as i;">
+                                                            <input class="dx-field-value placeHolderFont" type="checkbox"
+                                                                name="subject{{subject.subjectName}}" [checked]="selectedStreamSubjects[i].checked" 
+                                                                (change)="selectedStreamSubjects[i].checked= !selectedStreamSubjects[i].checked"
+                                                                formControlName="subjectId"  id="subjectId" [value] = "subjectId"
+                                                                (click)="validateCheckBox($event)">
+                                                                {{subject.subjectName}}
                                                         </div>
                                                     </div>
                                                 </div>
+                                            </div>      
                                         </div>
                                     </div>
                                 </div>
                             <br>
                             <div class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-info btn-fill" >Submit</button>&nbsp; &nbsp;
-                                    
+                                    <dx-validation-summary id="summary"></dx-validation-summary>
+                                    <dx-button class="btn btn-info btn-fill"
+                                        id="button"
+                                        text="Register"
+                                        type="success"  
+                                        [useSubmitBehavior]="true">
+                                    </dx-button>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <dx-popup
+                                [width]="600"
+                                [height]="300"
+                                [showTitle]="true"
+                                title="Student"
+                                [dragEnabled]="false"
+                                [showCloseButton] = "false"
+                                [closeOnOutsideClick]="false"
+                                [(visible)]="studentPopupVisible">
+                                <div class = "popupStyle" *dxTemplate="let data of 'content'">
+                                    <h4 class = "myfont">Please select from the below option to move further.</h4>
+                                    <div class = "row" style = "margin-top: 40px;">
+                                        <div class="col-md-12 text-center">
+                                            <dx-button class="btn btn-info btn-fill" (onClick) = "reloadPage()" 
+                                            text="Register More"
+                                            type="success" >
+                                            </dx-button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                            <dx-button class="btn btn-info btn-fill" routerLink="/login" 
+                                                text="Login" type="success">
+                                            </dx-button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </dx-popup>
+                    </div>
+                </div>
             </div>
-
         </form>
     </div>
 </div>
+<dx-load-panel shadingColor = "rgba(0,0,0,0.4)"  [showIndicator] = "true" [(visible)] = "loadingVisible"
+                [shading] = "true" [closeOnOutsideClick] = "false">
+</dx-load-panel>

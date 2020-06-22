@@ -1,0 +1,142 @@
+<div class="wrapper">
+    <div class="main-panel">
+        <div class="content"
+				style="z-index: 5; padding-top: 20px; padding-bottom: 0px;min-height: unset;">
+				<h3 style="color:#db3236; text-align: center; font-size: 20px;">Generate Reports</h3>
+        </div>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <div  id = "data-grid-demo"  style = "width: -webkit-fill-available; height: -webkit-fill-available;">
+                                <dx-data-grid 
+                                            id = "gridContainer"
+                                            [dataSource] = "students"
+                                            [showColumnLines] = "true"
+                                            [showRowLines] = "true"
+                                            [showBorders] = "true"
+                                            [rowAlternationEnabled] = "true"
+                                            [allowColumnResizing] = "true"
+                                            [allowColumnReordering] = "true"
+                                            [columnAutoWidth] = "true">
+                                           <!--  (onRowUpdated) = "updateStudent($event)"
+                                            (onEditingStart)="onEditingStart($event)"> -->
+                                        <dxo-column-chooser [enabled]="true" mode="dragAndDrop"> <!-- or "select" -->
+                                        </dxo-column-chooser>    
+                                        <dxo-scrolling columnRenderingMode="virtual" 
+                                                       rowRenderingMode="virtual" showScrollBar = "onHover"
+                                                       useNative = "false">
+                                        </dxo-scrolling>
+                                        <dxo-export [enabled]="true" fileName="Student-List" [allowExportSelectedData]="true"></dxo-export>
+                                
+                                        <dxo-header-filter [visible] = "true"></dxo-header-filter>
+                                        <dxo-search-panel [visible]="true"></dxo-search-panel>
+                                        <dxo-paging [enabled]="true" [pageSize]="5"></dxo-paging>
+                                        <dxo-selection mode="multiple"></dxo-selection>
+                                        <dxo-group-panel [visible]="true"></dxo-group-panel>
+                                        <!-- <dxo-paging [pageSize] = "10"></dxo-paging> -->
+                                        <dxo-pager
+                                            [showPageSizeSelector] = "true"
+                                            [allowedPageSizes]="[20, 30, 50]"
+                                            [showInfo] = "true">
+                                        </dxo-pager>
+                                        <dxo-editing
+                                            mode = "popup"
+                                            [allowUpdating] = "false"
+                                            [allowDeleting]="false"
+                                            [allowAdding] = "false">
+                                            <dxo-popup
+                                                title="Student Information"
+                                                [showTitle]="true"
+                                                [width]="800"
+                                                [height]="550"
+                                                [position]="{ my: 'top', at: 'top'}"> 
+                                                <!-- , of: window }"> -->
+                                            </dxo-popup>
+                                            <dxo-form>
+                                                <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+                                                    <dxi-item dataField="firstName"></dxi-item>
+                                                    <dxi-item dataField="lastName"></dxi-item>
+                                                    <dxi-item dataField="whatsappNumber"></dxi-item>
+
+                                                    <dxi-item dataField="fatherName"></dxi-item>
+                                                    <dxi-item dataField="motherName"></dxi-item>
+                                                    <dxi-item dataField="guardianPhoneNumber"></dxi-item>
+
+                                                    <dxi-item *ngIf = "itemVisible" 
+                                                               dataField="emailId" 
+                                                               [editorOptions]="{ disabled: true }">
+                                                    </dxi-item>
+                                                    <dxi-item *ngIf = "itemVisible" 
+                                                               dataField="gender" 
+                                                               [editorOptions]="{ disabled: true }">
+                                                    </dxi-item>
+                                                    <dxi-item *ngIf = "itemVisible" 
+                                                               dataField="category" 
+                                                               [editorOptions]="{ disabled: true }">
+                                                    </dxi-item>
+
+                                                    <dxi-item *ngIf = "itemVisible" 
+                                                               dataField="dateOfBirth" 
+                                                               [editorOptions]="{ disabled: true }">
+                                                    </dxi-item>
+                                                    <dxi-item *ngIf = "itemVisible" 
+                                                               dataField="age" 
+                                                               [editorOptions]="{ disabled: true }">
+                                                    </dxi-item>
+                                                    <dxi-item dataField="alternatePhoneNumber"></dxi-item>
+                                     
+                                                    <dxi-item *ngIf = "itemVisible" 
+                                                               dataField="collegeYear" 
+                                                               [editorOptions]="{ disabled: true }">
+                                                    </dxi-item>
+                                                    <dxi-item *ngIf = "itemVisible" 
+                                                               dataField="feeReceiptNumber" 
+                                                               [editorOptions]="{ disabled: true }">
+                                                    </dxi-item>
+                                                    <dxi-item *ngIf = "itemVisible" 
+                                                               dataField="enrollmentNumber" 
+                                                               [editorOptions]="{ disabled: true }">
+                                                    </dxi-item>
+                                                   
+                                                    <dxi-item dataField="streamName"></dxi-item>
+                                                    <dxi-item dataField="subjectName"></dxi-item>
+                                                    <dxi-item dataField="groupDivision"></dxi-item>
+
+                                                    <dxi-item dataField="studentCode"></dxi-item>
+                                                   
+                                                </dxi-item>
+                                            </dxo-form>
+                                        </dxo-editing>
+                                
+                                        <dxo-filter-row [visible] = "showFilterRow" [applyFilter] = "currentFilter"></dxo-filter-row>
+                                
+                                        <dxi-column dataField = "firstName" caption = "First Name"></dxi-column>
+                                        <dxi-column dataField = "lastName" caption = "Last Name"></dxi-column>
+                                        <dxi-column dataField = "fatherName" caption = "Father Name" ></dxi-column>
+                                        <dxi-column dataField = "motherName" caption = "Mother Name" ></dxi-column>
+                                        <dxi-column dataField = "emailId" caption = "Email ID"></dxi-column>
+                                        <dxi-column dataField = "gender" caption = "Gender"></dxi-column>
+                                        <dxi-column dataField = "category" caption = "Category" ></dxi-column>
+                                        <dxi-column dataField = "dateOfBirth" caption = "DOB"  dataType="date"></dxi-column>
+                                        <dxi-column dataField = "age" caption = "Age"></dxi-column>
+                                        <dxi-column dataField = "streamName" caption = "Stream"></dxi-column>
+                                        <dxi-column dataField = "subjectName" caption = "Subjects" ></dxi-column>
+                                        <dxi-column dataField = "groupDivision" caption = "Group Name" ></dxi-column>
+                                        <dxi-column dataField = "studentCode" caption = "Student Code"></dxi-column>
+                                        
+                                    </dx-data-grid>
+                                </div>
+                                
+                                <dx-load-panel shadingColor = "rgba(0,0,0,0.4)"  [showIndicator] = "true" [(visible)] = "loadingVisible"
+                                                [shading] = "true" [closeOnOutsideClick] = "false">
+                                               <!-- [showPanel] = "true"  -->
+                                </dx-load-panel>
+                        </div> 
+                    </div> 
+                </div>
+             </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,341 @@
+<div class="wrapper">
+    <div class="main-panel">
+        <div class="content"
+				style="z-index: 5; padding-top: 20px; padding-bottom: 0px;min-height: unset;">
+				<h3 style="color:#db3236; text-align: center; font-size: 20px;">Assign Groups</h3>
+        </div>
+        <div *ngIf = "selectYearDiv" class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class = "col-md-6">
+                                <div class="form-group">
+                                    <div class="dx-fieldset">
+                                        <div class="dx-field">
+                                            <div class="dx-field-label"style = "font-size: 14px;
+                                            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                                            font-weight: 550;">Select Year</div>
+                                            <div class="dx-field-value">
+                                                <dx-select-box [items]="year" 
+                                                               (onValueChanged) = "onSelectYearChange($event)"
+                                                               placeholder="Select Year">
+                                                </dx-select-box>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf = "showGroupSelectDiv" class = "col-md-6">
+                                <div class="form-group">
+                                    <div class="dx-fieldset">
+                                        <div class="dx-field">
+                                            <div class="dx-field-label" style = "font-size: 14px;
+                                            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                                            font-weight: 550;">Total Count
+                                        </div>
+                                        <div class="dx-field-value">
+                                            <dx-text-box class = "placeHolderFont" [value] ="countOfStudentToDisplay" [readOnly]="true">    
+                                            </dx-text-box>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <div class="row">
+                            <div *ngIf = "showGroupSelectDiv" class = "col-md-6">
+                                <div class="form-group">
+                                    <div class="dx-fieldset">
+                                        <div class="dx-field">
+                                            <div class="dx-field-label"style = "font-size: 14px;
+                                            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                                            font-weight: 550;">Group By</div>
+                                            <div class="dx-field-value">
+                                                <dx-select-box [dataSource]="options" 
+                                                                displayExpr="optionValue"
+                                                                valueExpr="id"
+                                                                [(value)] = "optionId"
+                                                                placeholder="Select Division Category"
+                                                               (onValueChanged) = "onSelectGroupByChange($event)">
+                                                </dx-select-box>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf = "selectNoOfGroupDiv" class = "col-md-6">
+                                <div class="form-group">
+                                    <div class="dx-fieldset">
+                                        <div class="dx-field">
+                                            <div class="dx-field-label"
+                                            style = "font-size: 14px;
+                                            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                                            font-weight: 550;">
+                                            Select no. of Groups</div>
+                                            <div class="dx-field-value">
+                                                <dx-number-box
+                                                    [(value)]="numberOfGroups"
+                                                    [min]="1"
+                                                    [max]="5"
+                                                    (onValueChanged) = "onSelectNumberOfGroups($event)"
+                                                    placeholder="Select no. of Group"></dx-number-box>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div *ngIf = "selectAplhabeticalDiv" class = "col-md-6">
+                                <div class="form-group">
+                                    <div class="dx-fieldset">
+                                        <div class="dx-field">
+                                            <div class="dx-field-label"
+                                            style = "font-size: 14px;
+                                            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+                                            font-weight: 550;">
+                                            Select no. of Group</div>
+                                            <div class="dx-field-value">
+                                                <dx-number-box placeholder="Select no. of Group" [disabled]="true"></dx-number-box>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class = "row">
+                <div class="col-md-12">
+                    <div class="card-body">
+                        <div class = "row"> 
+                            <div *ngIf = "selectAplhabeticalDiv" class ="col-md-12">
+                                <table class="table table-striped table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th class="myfont">Start Alphabet</th>
+                                            <th class="myfont">End Alphabet</th>
+                                            <th class="myfont">Student Count Included</th>
+                                            <th class="myfont">Group Name</th>
+                                            <th class="myfont">Add</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr *ngFor="let field of fieldArray; let i = index">
+                                            <td>
+                                                <input [(ngModel)]="field.start" class="form-control" type="text" name="{{field.start}}" />
+                                            </td>
+                                            <td>
+                                                <input [(ngModel)]="field.end" class="form-control" type="text" name="{{field.end}}" />
+                                            </td>
+                                            <td>
+                                                <input [(ngModel)]="field.count" class="form-control" type="text" name="{{field.count}}" />
+                                            </td>
+                                            <td>
+                                                <input [(ngModel)]="field.group" class="form-control" type="text" name="{{field.group}}" />
+                                            </td>
+                                            <td>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <dx-select-box [items]="alphabets"
+                                                                placeholder="Start"
+                                                                type="text" id="newAttributeStart"
+                                                                [(ngModel)]="newAttribute.start" name="newAttributeStart"
+                                                               (onValueChanged) = "onSelectStartAlphabet($event)"
+                                                               >
+                                                </dx-select-box>
+                                            </td>
+                                            <td>
+                                                <dx-select-box [items]="alphabets" placeholder="End"
+                                                               (onValueChanged) = "onSelectEndAlphabet($event)"
+                                                               id="newAttributeEnd" [(ngModel)]="newAttribute.end" name="newAttributeEnd" >
+                                                 </dx-select-box>
+                                            </td>
+                                            <td>
+                                                <dx-text-box [value] = "studentCountIncluded" placeholder="Student Count" 
+                                                             [readOnly]="true"
+                                                             id="newAttributeCount" [(ngModel)]="newAttribute.count" name="newAttributeCount">
+                                                </dx-text-box>
+                                            </td>
+                                            <td>
+                                                <dx-select-box [items]="group" placeholder="Group"
+                                                               id="newAttributeGroup" [(ngModel)]="newAttribute.group" name="newAttributeGroup"
+                                                               (onValueChanged) = "onSelectGroupNumber($event)">
+                                                 </dx-select-box>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-info btn-fill" type="button" (click)="addFieldValue()">Add</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <br>
+                        <div *ngIf = "selectAplhabeticalDiv || selectNoOfGroupDiv" class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-info btn-fill" 
+                                    (click) = "showStudentGroupWiseList()">Preview
+                            </button>&nbsp; &nbsp; &nbsp; &nbsp;&nbsp; &nbsp; 
+                            <button type="submit" class="btn btn-info btn-fill" 
+                                    (click) = "resetData()">Reset
+                            </button>&nbsp; &nbsp; 
+                        </div>
+                    </div>
+                </div> 
+            </div>
+        </div>
+        <div *ngIf = "showStudentGroupListDiv" class="container-fluid">
+            <div class="row">
+                <div class = "card-body myFont" style = "width: -webkit-fill-available; height: -webkit-fill-available;"></div>>
+                    <div  id = "data-grid-demo"  style = "width: -webkit-fill-available; height: -webkit-fill-available;">
+                        <dx-data-grid 
+                                    id = "gridContainer"
+                                    [dataSource] = "yearWiseStudentRecords"
+                                    [showColumnLines] = "true"
+                                    [showRowLines] = "true"
+                                    [showBorders] = "true"
+                                    [rowAlternationEnabled] = "true"
+                                    [allowColumnResizing] = "true"
+                                    [allowColumnReordering] = "true"
+                                    [columnAutoWidth] = "true">
+                                   <!--  (onRowUpdated) = "updateStudent($event)"
+                                    (onEditingStart)="onEditingStart($event)"> -->
+                                <dxo-scrolling columnRenderingMode="virtual" 
+                                               rowRenderingMode="virtual" showScrollBar = "onHover"
+                                               useNative = "false">
+                                </dxo-scrolling>
+                                <dxo-export [enabled]="true" fileName="Student-List" [allowExportSelectedData]="true"></dxo-export>
+                        
+                                <dxo-header-filter [visible] = "true"></dxo-header-filter>
+                                <dxo-search-panel [visible]="true"></dxo-search-panel>
+                                <dxo-paging [enabled]="true" [pageSize]="5"></dxo-paging>
+                                <dxo-selection mode="multiple"></dxo-selection>
+                                <dxo-group-panel [visible]="true"></dxo-group-panel>
+                                <!-- <dxo-paging [pageSize] = "10"></dxo-paging> -->
+                                <dxo-pager
+                                    [showPageSizeSelector] = "true"
+                                    [showInfo] = "true">
+                                </dxo-pager>
+                                <dxo-editing
+                                    mode = "popup"
+                                    [allowUpdating] = "false"
+                                    [allowDeleting]="false"
+                                    [allowAdding] = "false">
+                                    <dxo-popup
+                                        title="Student Information"
+                                        [showTitle]="true"
+                                        [width]="800"
+                                        [height]="550"
+                                        [position]="{ my: 'top', at: 'top'}"> 
+                                        <!-- , of: window }"> -->
+                                    </dxo-popup>
+                                    <dxo-form>
+                                        <dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+                                                            <dxi-item dataField="firstName" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item dataField="lastName" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item dataField="fatherName" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item dataField="motherName" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item dataField="whatsappNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item dataField="guardianPhoneNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item  dataField="emailId" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="alternatePhoneNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item  dataField="gender" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="category" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item  dataField="dateOfBirth" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="age" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                           
+                                                            <dxi-item  dataField="collegeYear" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="feeReceiptNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="enrollmentNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                           
+                                                            <dxi-item dataField="groupDivision"></dxi-item>
+                                                            <dxi-item dataField="studentCode"></dxi-item>
+                                                           
+                                                        </dxi-item><dxi-item itemType="group" [colCount]="2" [colSpan]="2">
+                                                            <dxi-item dataField="firstName" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item dataField="lastName" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item dataField="fatherName" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item dataField="motherName" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item dataField="whatsappNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item dataField="guardianPhoneNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item  dataField="emailId" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="alternatePhoneNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item  dataField="gender" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="category" [editorOptions]="{ disabled: true }"></dxi-item>
+                
+                                                            <dxi-item  dataField="dateOfBirth" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="age" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                           
+                                                            <dxi-item  dataField="collegeYear" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="feeReceiptNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                            <dxi-item  dataField="enrollmentNumber" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                           
+                                                            <dxi-item dataField="groupDivision"></dxi-item>
+                                                            <dxi-item dataField="studentCode" [editorOptions]="{ disabled: true }"></dxi-item>
+                                                           
+                                                        </dxi-item>
+                                    </dxo-form>
+                                </dxo-editing>
+                        
+                                <dxo-filter-row [visible] = "showFilterRow" [applyFilter] = "currentFilter"></dxo-filter-row>
+                        
+                                <dxi-column dataField = "userName" caption = "User Name" [(visible)]= "itemVisible"></dxi-column>
+                                <dxi-column dataField = "firstName" caption = "First Name"></dxi-column>
+                                <dxi-column dataField = "lastName" caption = "Last Name"></dxi-column>
+                                <dxi-column dataField = "emailId" caption = "Email ID"></dxi-column>
+                
+                                <dxi-column dataField = "fatherName" caption = "Father Name" ></dxi-column>
+                                <dxi-column dataField = "motherName" caption = "Mother Name" ></dxi-column>
+                                <dxi-column dataField = "dateOfBirth" caption = "DOB"  dataType="date"></dxi-column>
+                
+                                <dxi-column dataField = "collegeYear" caption = "College Year" dataType = "number"></dxi-column>  
+                                <dxi-column dataField = "groupDivision" caption = "Group Name" ></dxi-column>
+                                <dxi-column dataField = "studentCode" caption = "Student Code"></dxi-column>
+                
+                                <dxi-column dataField = "gender" caption = "Gender"></dxi-column>
+                                <dxi-column dataField = "category" caption = "Category" ></dxi-column>
+                              
+                                <dxi-column dataField = "whatsappNumber" caption = "WhatsApp Number" dataType="number" [(visible)]= "itemVisible"></dxi-column>
+                                <dxi-column dataField = "guardianPhoneNumber" caption = "Guardian Number" dataType="number" [(visible)]= "itemVisible"></dxi-column>
+                                <dxi-column dataField = "alternatePhoneNumber" caption = "Alternate Number" dataType="number" [(visible)]= "itemVisible"></dxi-column>
+                                <dxi-column dataField = "age" caption = "Age" dataType = "number" [(visible)]= "itemVisible"></dxi-column>
+                                <dxi-column dataField = "streamName" caption = "Stream" [(visible)]= "itemVisible"></dxi-column>
+                                <dxi-column dataField = "subjectName" caption = "Subjects" [(visible)]= "itemVisible"></dxi-column>
+                                <dxi-column dataField = "feeReceiptNumber" caption = "Fee Receipt Number" dataType = "number" [(visible)]= "itemVisible"></dxi-column>
+                                <dxi-column dataField = "enrollmentNumber" caption = "Enrollment Number" dataType = "number" [(visible)]= "itemVisible"></dxi-column>
+                                
+                        </dx-data-grid>
+                    </div> 
+                </div>
+                <div *ngIf = "showStudentGroupListDiv" class="col-md-12 text-center">
+                            <button type="submit" class="btn btn-info btn-fill" 
+                                    (click) = "updateGroups()">Save Data
+                            </button> &nbsp;&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-info btn-fill" 
+                                (click) = "resetDataAfterPreview()">Reset Data
+                            </button>
+                </div>
+        </div>
+    </div>
+</div>
+<dx-load-panel shadingColor = "rgba(0,0,0,0.4)"  [showIndicator] = "true" [(visible)] = "loadingVisible"
+                [shading] = "true" [closeOnOutsideClick] = "false">
+               <!-- [showPanel] = "true"  -->
+</dx-load-panel>
