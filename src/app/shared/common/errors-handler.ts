@@ -34,7 +34,7 @@ export class ErrorsHandler implements ErrorHandler{
           notify(error.message,'error',4000);
         }
         //log the error anyway
-       // console.log(error);
+        console.log(error);
       }
     
 }

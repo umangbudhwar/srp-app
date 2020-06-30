@@ -10,6 +10,7 @@ import { LogoutComponent } from './logout/logout.component';
 import { DashboardsComponent } from './dashboards/dashboards.component';
 import { AssignGroupComponent } from './assign-group/assign-group.component';
 import { ChangeGroupComponent } from './change-group/change-group.component';
+import { VerifyProfileComponent } from './verify-profile/verify-profile.component';
 
 
 const routes: Routes = [
@@ -18,14 +19,8 @@ const routes: Routes = [
   { path: 'popup', component: PopupComponent }, 
   { path: 'registerFaculty', component: RegisterFacultyComponent },
   { path: 'registerStudent', component: RegisterStudentComponent },
-
- /*  { path: 'logout',component: LogoutComponent},          
-  { path: 'home',component: HomeComponent},             
-  { path: 'dashboards',component: DashboardsComponent},    
-  { path: 'assignGroup',component: AssignGroupComponent},  
-  { path: 'changeGroup',component: ChangeGroupComponent} */
-
-  { path: 'logout', component: LogoutComponent,canActivate:[AuthGuardService] },           //canActivate:[AuthGuardService]
+  { path: 'home/verifyProfile', component: VerifyProfileComponent,canActivate:[AuthGuardService]},
+  { path: 'logout', component: LogoutComponent,canActivate:[AuthGuardService]},           //canActivate:[AuthGuardService]
   { path: 'home', component: HomeComponent,canActivate:[AuthGuardService]},                //canActivate:[AuthGuardService]
   { path: 'dashboards', component: DashboardsComponent,canActivate:[AuthGuardService]},    //canActivate:[AuthGuardService] 
   { path: 'assignGroup', component: AssignGroupComponent,canActivate:[AuthGuardService]},  // ,canActivate:[AuthGuardService]

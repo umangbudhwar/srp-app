@@ -11,8 +11,8 @@
                     <div class="card-body">
                         <div class = "row">
                             <div class="col-md-6">
-                                <div class="form-group">
-                                   <ul class = "list-unstyled myfont">
+                                <div *ngIf = "showDiv" class="form-group">
+                                   <ul *ngIf = "isFaculty" class = "list-unstyled myfont">
                                        <li>
                                             <a class = "myfont" routerLink="dashboards" routerLinkActive="active">Fetch Reports</a>
                                         </li>
@@ -29,6 +29,15 @@
                                             <a class = "myfont" routerLink="logout" routerLinkActive="active">Logout</a>
                                        </li>
                                    </ul>
+                                   <ul *ngIf = "isStudent" class = "list-unstyled myfont">
+                                        <li>
+                                            <a class = "myfont" routerLink="verifyProfile" routerLinkActive="active">Verify Profile</a>
+                                        </li>
+                                        <br>
+                                        <li>
+                                            <a class = "myfont" routerLink="logout" routerLinkActive="active">Logout</a>
+                                    </li>
+                                </ul>
                                 </div>
                             </div>
                         </div>

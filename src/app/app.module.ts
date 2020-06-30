@@ -47,6 +47,7 @@ import { DashboardsComponent } from './dashboards/dashboards.component';
 import { DatePipe } from '@angular/common';
 import { AssignGroupComponent } from './assign-group/assign-group.component';
 import { ChangeGroupComponent } from './change-group/change-group.component';
+import { VerifyProfileComponent } from './verify-profile/verify-profile.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ChangeGroupComponent } from './change-group/change-group.component';
     HomeComponent,
     DashboardsComponent,
     AssignGroupComponent,
-    ChangeGroupComponent
+    ChangeGroupComponent,
+    VerifyProfileComponent
   ],
   imports: [
     BrowserModule,

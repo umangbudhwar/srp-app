@@ -17,6 +17,12 @@ export class StudentManagementService {
     return this.httpClient.post<Student>(`${environment.apiUrl.UserUrl.registerStudent}`, student);
   }
 
+  /* public verifyStudent(student,verified)
+  {
+    let url = `${environment.apiUrl.UserUrl.verifyStudent}`;
+    return this.httpClient.post<Student>(url,student,verified);
+  } */
+
   public getStudentForReportGeneration(facultyUserName: String)
   {
     let url = `${environment.apiUrl.UserUrl.getStudents}`+`/`+facultyUserName;
@@ -57,15 +63,15 @@ export class StudentManagementService {
     let url = `${environment.apiUrl.UserUrl.updateBatchGroupCode}`;
     return this.httpClient.put<Student[]>(url,studentList);
   }
-  public findIfUserNameExists(userName:string)
+  public findIfUserNameExists(userName:String)
   {
     let url = `${environment.apiUrl.UserUrl.findIfUserNameExist}`+`/`+userName;
     return this.httpClient.get<boolean>(url);
   }
   
-  /* public findIfUserNameExist(userName:string) {
-    return this.findIfUserNameExist(userName).pipe(map(res =>{
-      return res ? null : {userNameExists: true};
-    }));
-  } */
+  public fetchStudentForVerification(userName:String)
+  {
+    let url = `${environment.apiUrl.UserUrl.fetchStudentForVerification}`+`/`+userName;
+    return this.httpClient.get<Student>(url);
+  }
 }

@@ -2,7 +2,7 @@ let baseUrl = null;
 const apiContext = '/api/rest/srp';
 
 if(window.location.href.indexOf('localhost') > 1){
-  baseUrl = 'http://localhost:8080';
+  baseUrl = 'http://localhost:8081';
 }
 
 const userUrl = {
@@ -20,6 +20,8 @@ const userUrl = {
   updateBatchGroupCode : baseUrl + apiContext + '/student/updateBatchGroupCode',
   findIfUserNameExist: baseUrl + apiContext + '/student/findIfUserNameExist',
   findIfFacultyUserNameExist: baseUrl + apiContext + '/faculty/findIfFacultyUserNameExist',
+  fetchStudentForVerification: baseUrl + apiContext + '/student/fetchStudentForVerification',
+  // verifyStudent: baseUrl + apiContext + '/student/verifyStudent',
 }
 
 const apiUrl = {

@@ -30,6 +30,8 @@ import {
 } from 'devextreme-angular';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { AuthenticationService } from '../shared/service/authentication.service';
+import { UserAuth } from '../shared/model/user-auth';
 
 @Component({
   selector: 'app-register-student',
@@ -40,6 +42,7 @@ export class RegisterStudentComponent implements OnInit {
 
   loadingVisible: boolean = true;
   studentPopupVisible: boolean = false;
+  checkBoxDisabled: boolean = false;
 
   studentRegisterForm: FormGroup = new FormGroup({});
 
@@ -61,6 +64,8 @@ export class RegisterStudentComponent implements OnInit {
 
   namePattern: RegExp = /^[^0-9]+$/;
   phonePattern: RegExp = /^[6-9]\d{9}$/;
+  otp: number = 456789;
+  userAuth: UserAuth = null;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -68,58 +73,69 @@ export class RegisterStudentComponent implements OnInit {
     private errorHandler: ErrorsHandler,
     private router: Router,
     private streamService: StreamService,
-    private subjectService: SubjectService
+    private subjectService: SubjectService,
+    public authenticationService: AuthenticationService
   ) {
 
   }
 
   ngOnInit(): void {
     this.loadingVisible = false;
+    this.userAuth = this.authenticationService.getAuthUser();
 
-    this.streamService.getStreams().subscribe((data) => {
-      this.streams = data;
-    });
-
-    this.subjectService.getSubjects().subscribe((data) => {
-      this.subjects = data;
-    });
-
-    this.genderOptions = ["Male", "Female", "Transgender"];
-    this.categoryOptions = ["General", "SC", "ST", "OBC", "Others"];
-
-    this.studentRegisterForm = this.formBuilder.group(
-      {
-        userName: ['', [Validators.required], this.findIfUserNameExist.bind(this)],
-        studentOTP: ['', [Validators.required]],
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        whatsappNumber: ['', Validators.required],
-        fatherName: ['', Validators.required],
-        motherName: ['', Validators.required],
-        guardianPhoneNumber: ['', Validators.required],
-        emailId: ['', Validators.required],
-        age: ['', Validators.required],
-        dateOfBirth: ['', Validators.required],
-        gender: ['', Validators.required],
-        category: ['', Validators.required],
-        alternatePhoneNumber: [''],
-        collegeYear: ['', Validators.required],
-        feeReceiptNumber: [''],
-        enrollmentNumber: [''],
-        groupDivision: [''],
-        streamId: ['', Validators.required],
-        subjectId: ['', Validators.required],
-        studentCode: ['', Validators.required],
-        password: ['', Validators.required],
-        confirmPassword: ['', Validators.required],
-      }
-    );
+      this.streamService.getStreams().subscribe((data) => {
+        this.streams = data;
+      });
+  
+      this.subjectService.getSubjects().subscribe((data) => {
+        this.subjects = data;
+      });
+  
+      this.genderOptions = ["Male", "Female", "Transgender"];
+      this.categoryOptions = ["General", "SC", "ST", "OBC", "Others"];
+  
+      this.studentRegisterForm = this.formBuilder.group(
+        {
+          userName: ['', [Validators.required], this.findIfUserNameExist.bind(this)],
+          studentOTP: ['', [Validators.required]],
+          firstName: ['', Validators.required],
+          lastName: ['', Validators.required],
+          whatsappNumber: ['', Validators.required],
+          fatherName: ['', Validators.required],
+          motherName: ['', Validators.required],
+          guardianPhoneNumber: ['', Validators.required],
+          emailId: ['', Validators.required],
+          age: ['', Validators.required],
+          dateOfBirth: ['', Validators.required],
+          gender: ['', Validators.required],
+          category: ['', Validators.required],
+          alternatePhoneNumber: [''],
+          collegeYear: ['', Validators.required],
+          feeReceiptNumber: [''],
+          enrollmentNumber: [''],
+          groupDivision: [''],
+          streamId: ['', Validators.required],
+          subjectId: ['', Validators.required],
+          studentCode: ['', Validators.required],
+          password: ['', Validators.required],
+          confirmPassword: ['', Validators.required],
+        }
+      );
   }
   passwordComparison = () => {
     return this.password;
   };
   checkComparison() {
     return true;
+  }
+  isFaculty():boolean{
+    if (this.userAuth.role.toUpperCase().search('FACULTY') == -1)
+    {
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
   validateCheckBox($event) {
@@ -130,13 +146,15 @@ export class RegisterStudentComponent implements OnInit {
       notify('Subject is required', 'error', 4000);
     } */ 
     if (this.selectedStreamId == 1 && (this.collegeYear == 1 || this.collegeYear == 2) && selectedSubjects.length > 2) {
-      $event.preventDefault();
+     // $event.preventDefault();
       notify('You can only select 3 subjects', 'error', 4000);
+      this.checkBoxDisabled = true;
      // $event.preventDefault();
     } 
     else if (this.selectedStreamId == 1 && this.collegeYear == 3 && selectedSubjects.length > 1) {
-      $event.preventDefault();
+      //$event.preventDefault();
       notify('You can only select 2 subjects', 'error', 4000);
+      this.checkBoxDisabled = true;
      // $event.preventDefault();
     }
     else if (this.selectedStreamId == 1 && (this.collegeYear == 1 || this.collegeYear == 2) && selectedSubjects.length < 3) {
@@ -206,12 +224,12 @@ export class RegisterStudentComponent implements OnInit {
         (data) => {
           notify('You have successflly registerted.', 'success', 4000);
           this.loadingVisible = false;
-          //this.router.navigate(['/registerStudent']);
           this.items = '';
           this.studentRegisterForm.reset();
           this.studentPopupVisible = true;
         },
         (error) => {
+          notify('Some Error Occured.', 'success', 4000);
           this.loadingVisible = false;
           this.errorHandler.handleError(error);
           this.router.navigate(['/registerStudent']);
@@ -219,23 +237,6 @@ export class RegisterStudentComponent implements OnInit {
           this.studentRegisterForm.reset();
         }
       );
-    /* this.studentService.registerStudent(student).subscribe(
-      (data) => {
-        notify('You have successflly registerted.', 'success', 4000);
-        this.loadingVisible = false;
-        //this.router.navigate(['/registerStudent']);
-        this.items = '';
-        this.studentRegisterForm.reset();
-        this.studentPopupVisible = true;
-      },
-      (error) => {
-        this.loadingVisible = false;
-        this.errorHandler.handleError(error);
-        this.router.navigate(['/registerStudent']);
-        this.items = '';
-        this.studentRegisterForm.reset();
-      }
-    ); */
   }
   reloadPage()
   {

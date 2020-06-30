@@ -15,7 +15,8 @@ export class HeaderComponent implements OnInit {
   isDarkTheme: Observable<boolean>;
   userName: String = null;
   userAuth: UserAuth = null;
-
+  showDiv:boolean = false;
+  
   constructor(private themeService: ThemeService,public authenticationService: AuthenticationService,
               private router: Router) { }
 
@@ -24,6 +25,19 @@ export class HeaderComponent implements OnInit {
     this.isDarkTheme = this.themeService.isDarkTheme;
     this.userAuth = this.authenticationService.getAuthUser();
 
+    if(this.userAuth!=null){
+      this.showDiv = true;
+      this.isFaculty();
+    }
+  }
+  isFaculty():boolean{
+    if (this.userAuth.role.toUpperCase().search('FACULTY') == -1)
+    {
+      return false;
+    }
+    else{
+      return true;
+    }
   }
 
   toggleDarkTheme(checked: boolean): void {

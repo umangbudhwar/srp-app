@@ -1,0 +1,355 @@
+<div class="wrapper">
+    <div class="main-panel">
+        <div class="content"
+				style="z-index: 5; padding-top: 20px; padding-bottom: 0px;min-height: unset;">
+				<h3 style="color:#db3236; text-align: center; font-size: 20px;">Student Verification</h3>
+        </div>
+        <div *ngIf = "student">
+        <div *ngIf = "studentVerified" class="content"
+				style="z-index: 5; padding-top: 20px; padding-bottom: 0px;min-height: unset;">
+				<h3 style="color:#db3236; text-align: center; font-size: 20px;">Profile Alreday Verified.</h3>
+        </div>
+        <div *ngIf = "!studentVerified" class="content">
+            <form [formGroup]="studentRegisterForm" (ngSubmit)="submit($event)" novalidate>
+                <div class="container-fluid">
+                    <div class = "row">
+                        <div class="col-md-12">
+                            <div class = "card">
+                                <div class = "card-header">
+                                    <span class = "card-title"></span>
+                                    <h4 class = "cardHeading">Credentials Details</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class = "row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <label class = "myfont">User Name</label> 
+                                                <dx-text-box class="form-control placeHolderFont" 
+                                                             placeholder="Select a user name" 
+                                                             id="userName"
+                                                             
+                                                             [(value)] = "student.userName"
+                                                             [disabled] = "true">
+                                                   <!--  <dx-validator>
+                                                        <dxi-validation-rule type="required" message="User Name is required"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="stringLength" [min]="4" message="User Name must have at least 4 characters"></dxi-validation-rule>
+                                                    </dx-validator> -->
+                                                </dx-text-box>
+                                                <!-- <div *ngIf="studentRegisterForm.controls['userName'].invalid && studentRegisterForm.controls['userName'].touched" 
+                                                     class = "alert alert-danger" style = "margin-top: 3px;">
+                                                    <div *ngIf = "studentRegisterForm.controls['userName'].errors.userNameExists">User Name already exist.</div>
+                                                </div> -->
+                                        </div>
+                                    </div>
+                                   
+                                </div>
+                                
+                            </div>
+                            <div class = "card">
+                                <div class = "card-header">
+                                    <span class = "card-title"></span>
+                                    <h4 class = "cardHeading">Personal Details</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class = "row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Student First Name</label>
+                                                <dx-text-box class="form-control placeHolderFont" placeholder="Student First Name" 
+                                                             [(value)]="student.firstName" 
+                                                              id="firstName"  [disabled] = "editable">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Name is required"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="stringLength" [min]="2" message="Name must have at least 2 characters"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Student Last Name</label>
+                                                <dx-text-box class="form-control placeHolderFont" placeholder="Student Last Name" 
+                                                             [(value)]="student.lastName" 
+                                                             id="lastName"  [disabled] = "editable">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Last Name is required"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="stringLength" [min]="2" message="Last Name must have at least 2 characters"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Student Phone Number</label>
+                                                <dx-text-box class="form-control placeHolderFont" placeholder="Whatsapp Number" 
+                                                             [(value)]="student.whatsappNumber"  
+                                                             id="whatsappNumber"  [disabled] = "editable"> 
+                                                            <dx-validator  name="Phone number">
+                                                                <dxi-validation-rule type="required" message = "Phone Number is required."></dxi-validation-rule>
+                                                                <dxi-validation-rule type="pattern" [pattern]="phonePattern" message = "Phone number must be a valid number"></dxi-validation-rule>
+                                                                <dxi-validation-rule type="numeric" message = "Phone number must be numeric value"></dxi-validation-rule>
+                                                            </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Father's Name</label>
+                                                <dx-text-box class="form-control placeHolderFont" placeholder="Father's Name" 
+                                                             [(value)]="student.fatherName" 
+                                                               id="fatherName"  [disabled] = "editable">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Father's Name is required"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="stringLength" [min]="2" message="Last Name must have at least 2 characters"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Mother's Name</label> 
+                                                <dx-text-box class="form-control placeHolderFont" placeholder="Mother's Name" 
+                                                             [(value)]="student.motherName" 
+                                                              id="motherName"  [disabled] = "editable">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Mother's Name is required"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="pattern" [pattern]="namePattern" message="Do not use digits in the Name"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="stringLength" [min]="2" message="Last Name must have at least 2 characters"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Guardian Phone Number</label>
+                                                <dx-text-box class="form-control placeHolderFont" placeholder="Guardian Phone Number" 
+                                                             [(value)]="student.guardianPhoneNumber" 
+                                                              id="guardianPhoneNumber"  [disabled] = "editable"> 
+                                                    <dx-validator  name="Phone number">
+                                                        <dxi-validation-rule type="required" message = "Guardian Phone Number is required."></dxi-validation-rule>
+                                                        <dxi-validation-rule type="pattern" [pattern]="phonePattern"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Email ID</label> 
+                                                <dx-text-box class="form-control placeHolderFont" [(value)]="student.emailId"  id="emailId"
+                                                             placeholder="Email ID"   [disabled] = "editable"> 
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Email is required"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="email" message="Email is invalid"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Date of Birth</label>
+                                                <dx-date-box class="form-control placeHolderFont" placeholder="DOB as per Birth Certificate" 
+                                                             [(value)]="student.dateOfBirth"  id="dateOfBirth" 
+                                                             valueChangeEvent = "focusout"
+                                                             
+                                                             (onValueChanged)="ageFromDateOfBirthday($event)"
+                                                             invalidDateMessage="The date must have the following format: MM/dd/yyyy"  [disabled] = "editable">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Date of birth is required"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-date-box>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Age</label>
+                                                <dx-text-box class="form-control placeHolderFont" placeholder="Age" 
+                                                             [(value)]="student.age"  id="age" 
+                                                             
+                                                             [readOnly]="true"  [disabled] = "editable">
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Gender</label>
+                                                  <dx-select-box class="form-control placeHolderFont" [(value)]="student.gender"  id="gender" 
+                                                        [dataSource]="genderOptions"
+                                                        placeholder="Gender"
+                                                        
+                                                        [showClearButton]="false"  [disabled] = "editable">
+                                                        <dx-validator>
+                                                            <dxi-validation-rule type="required" message="Gender is required"></dxi-validation-rule>
+                                                        </dx-validator>
+                                                    </dx-select-box>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Category</label>
+                                                  <dx-select-box class="form-control placeHolderFont" [(value)]="student.category"  id="category" 
+                                                        [dataSource]="categoryOptions"
+                                                        placeholder="Category"
+                                                        
+                                                        [showClearButton]="false"  [disabled] = "editable">
+                                                        <dx-validator>
+                                                            <dxi-validation-rule type="required" message="Category is required"></dxi-validation-rule>
+                                                        </dx-validator>
+                                                    </dx-select-box>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Alternate Phone Number</label><i class="placeHolderFont">(Optional)</i>
+                                                <dx-text-box class="form-control placeHolderFont" placeholder="Alternate Phone Number" 
+                                                             [(value)]="student.alternatePhoneNumber" 
+                                                              id="alternatePhoneNumber"  [disabled] = "editable"> 
+                                                    <dx-validator  name="Phone number">
+                                                        <dxi-validation-rule type="pattern" [pattern]="phonePattern"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+    
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class = "row">
+                                    <div class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">College Year</label>
+                                                <dx-text-box class="form-control placeHolderFont" 
+                                                             placeholder="College Year (1,2,3,4)"
+                                                             [(value)]="student.collegeYear" 
+                                                             id="collegeYear"
+                                                             (change)=isFirstYear()  [disabled] = "editable">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="College year is required"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                    <div *ngIf = "isFirstYear() || student.feeReceiptNumber" class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Fee Receipt Number</label>
+                                                <dx-text-box class="form-control placeHolderFont" 
+                                                             placeholder="Fee Receipt Number"
+                                                             [(value)]="student.feeReceiptNumber" 
+                                                              id="feeReceiptNumber"  [disabled] = "editable">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Fee Receipt Number is required"></dxi-validation-rule>
+                                                        <dxi-validation-rule type="numeric"  message="Fee Receipt Number must be a numeric value."></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                    <div *ngIf = "!isFirstYear() || student.enrollmentNumber" class="col-md-4">
+                                        <div class="form-group">
+                                            <label class = "myfont">Student Enrollment Number</label>
+                                                <dx-text-box class="form-control placeHolderFont" 
+                                                             placeholder="Student Enrollment Number"
+                                                             [(value)]="student.enrollmentNumber" 
+                                                              id="enrollmentNumber"  [disabled] = "editable">
+                                                    <dx-validator>
+                                                        <dxi-validation-rule type="required" message="Student Enrollment Number is required"></dxi-validation-rule>
+                                                    </dx-validator>
+                                                </dx-text-box>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "card">
+                                <div class = "card-header">
+                                    <span class = "card-title"></span>
+                                    <h4 class = "cardHeading">Subject Details</h4>
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class = "row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            <div class="dx-fieldset">
+                                                <div class="dx-field">
+                                                    <label class="dx-field-label myfont">Stream</label>
+                                                    <div class="dx-field-value placeHolderFont">
+                                                        <dx-select-box #selectBox [dataSource]="streams"
+                                                                    displayExpr="streamName" valueExpr="streamId"
+                                                                    class="placeHolderFont"
+                                                                    placeholder="Choose your Stream"
+                                                                    [(value)]="student.streamId" id="streamId"
+                                                                    
+                                                                    (onValueChanged)="onStreamSelectChange($event)"  [disabled] = "editable">
+                                                                    <div *dxTemplate="let data of 'item'">
+                                                                        {{data.streamName}}
+                                                                    </div>
+                                                                    <dx-validator>
+                                                                        <dxi-validation-rule type="required" message="Stream is required"></dxi-validation-rule>
+                                                                    </dx-validator>
+                                                        </dx-select-box>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                    <div class = "row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="dx-fieldset">
+                                                    <div class="dx-field">
+                                                        <label class="dx-field-label myfont">Subjects</label>
+                                                        <div class="dx-field-value placeHolderFont" style="line-height: 22px;">
+                                                            <div class="dx-field-value placeHolderFont" style="line-height: 22px;">
+                                                                <div *ngFor="let subject of selectedStreamSubjects; index as i;">
+                                                                    <input class="dx-field-value placeHolderFont" type="checkbox"
+                                                                        name="subject{{subject.subjectName}}" [checked]="selectedStreamSubjects[i].checked" 
+                                                                        (change)="selectedStreamSubjects[i].checked= !selectedStreamSubjects[i].checked"
+                                                                        id="subjectId" [value] = "subjectId"
+                                                                        (click)="validateCheckBox($event)"
+                                                                        >
+                                                                        {{subject.subjectName}}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>      
+                                            </div>
+                                        </div>
+                                    </div>
+                                <br>
+                                <div class="col-md-12 text-center">
+                                        <dx-validation-summary id="summary"></dx-validation-summary>
+                                        <dx-button class="btn btn-info btn-fill"
+                                            id="button"
+                                            text="Verify"
+                                            type="success"  
+                                            [useSubmitBehavior]="true">
+                                        </dx-button>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+                                        <dx-button class="btn btn-info btn-fill"
+                                        id="button"
+                                        text="Edit"
+                                        type="success"
+                                        (click) = "editProfile($event)"  
+                                        >
+                                    </dx-button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div> 
+            </form>
+        </div>
+</div>
+</div>
+<dx-load-panel shadingColor = "rgba(0,0,0,0.4)"  [showIndicator] = "true" [(visible)] = "loadingVisible"
+                [shading] = "true" [closeOnOutsideClick] = "false">
+</dx-load-panel>

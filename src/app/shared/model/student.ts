@@ -6,7 +6,7 @@ export class Student{
 	 lastName: String;
 	 emailId: String;
 	 dateOfBirth: String;
-	 age: String;
+	 age: number;
 	 feeReceiptNumber: number;
 	 enrollmentNumber: String;
 	 collegeYear: number;
@@ -25,4 +25,5 @@ export class Student{
      studentCode: String;
 	 studentOTP: number;
 	 yearId: number;
+	 verified: boolean;
 }
