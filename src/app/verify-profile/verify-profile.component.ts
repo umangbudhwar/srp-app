@@ -80,13 +80,10 @@ export class VerifyProfileComponent implements OnInit {
 
     ngOnInit(): void {
     this.user = this.authUser.getAuthUser();
-    this.loadStudentInfo(this.user.userName);
-
    /*  if(this.student != null) {
       this.isVerified();
-      // this.autoPopulateSubjects();
-    }
- */
+    } */
+
     this.streamService.getStreams().subscribe((data) => {
       this.streams = data;
     });
@@ -94,6 +91,10 @@ export class VerifyProfileComponent implements OnInit {
     this.subjectService.getSubjects().subscribe((data) => {
       this.subjects = data;
     });
+
+    if(this.subjects!=null) {
+      this.loadStudentInfo(this.user.userName);
+    }
 
     this.genderOptions = ["Male", "Female", "Transgender"];
     this.categoryOptions = ["General", "SC", "ST", "OBC", "Others"];
@@ -110,8 +111,6 @@ export class VerifyProfileComponent implements OnInit {
       temp.forEach((subjectId) => {
         if(subjectId == subject.subjectId )
               subject.checked = true;
-          /* else
-            subject.checked = false; */
       });
     }); 
   }
@@ -121,7 +120,7 @@ export class VerifyProfileComponent implements OnInit {
       (data) => { this.student = data;
       console.log(this.student);
       this.isVerified();
-      if(this.studentVerified == true){this.autoPopulateSubjects();}
+      this.autoPopulateSubjects();
       this.loadingVisible = false;});
   }
   isVerified(){
@@ -215,7 +214,6 @@ export class VerifyProfileComponent implements OnInit {
     );
 
   }
-
   editProfile($event){
     this.editable = false;
   }

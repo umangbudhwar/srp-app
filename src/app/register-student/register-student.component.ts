@@ -64,7 +64,7 @@ export class RegisterStudentComponent implements OnInit {
 
   namePattern: RegExp = /^[^0-9]+$/;
   phonePattern: RegExp = /^[6-9]\d{9}$/;
-  otp: number = 456789;
+  studentOTP: number = 456789;
   userAuth: UserAuth = null;
 
   constructor(
@@ -128,6 +128,13 @@ export class RegisterStudentComponent implements OnInit {
   checkComparison() {
     return true;
   }
+  otpComparison = () => {
+    return this.studentOTP;
+  }
+ /*  checkOtpComparison(){
+    return true;
+  } */
+
   isFaculty():boolean{
     if (this.userAuth.role.toUpperCase().search('FACULTY') == -1)
     {
@@ -138,21 +145,25 @@ export class RegisterStudentComponent implements OnInit {
     }
   }
 
+  checkOTP(){
+    let studentOTP = this.studentRegisterForm.get('studentOTP').value;
+    if(true){
+    return {checkOTP: true}};
+
+  }
+
   validateCheckBox($event) {
     let selectedSubjects: Subject[] = this.subjects.filter((subject) => subject.checked);
     this.collegeYear = this.studentRegisterForm.get('collegeYear').value;
     
-    /* if (selectedSubjects.length == 0) {
-      notify('Subject is required', 'error', 4000);
-    } */ 
     if (this.selectedStreamId == 1 && (this.collegeYear == 1 || this.collegeYear == 2) && selectedSubjects.length > 2) {
-     // $event.preventDefault();
+      $event.preventDefault();
       notify('You can only select 3 subjects', 'error', 4000);
       this.checkBoxDisabled = true;
      // $event.preventDefault();
     } 
     else if (this.selectedStreamId == 1 && this.collegeYear == 3 && selectedSubjects.length > 1) {
-      //$event.preventDefault();
+      $event.preventDefault();
       notify('You can only select 2 subjects', 'error', 4000);
       this.checkBoxDisabled = true;
      // $event.preventDefault();
@@ -229,9 +240,9 @@ export class RegisterStudentComponent implements OnInit {
           this.studentPopupVisible = true;
         },
         (error) => {
-          notify('Some Error Occured.', 'success', 4000);
+          notify('Some Error Occured.', 'error', 4000);
           this.loadingVisible = false;
-          this.errorHandler.handleError(error);
+          // this.errorHandler.handleError(error);
           this.router.navigate(['/registerStudent']);
           this.items = '';
           this.studentRegisterForm.reset();

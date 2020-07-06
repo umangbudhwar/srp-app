@@ -32,4 +32,9 @@ callStudent(){
   this.popupVisible = false;
   this.studentPopupVisible = true;
 }
+back(){
+  this.studentPopupVisible =false;
+  this.facultyPopupVisible = false;
+  this.popupVisible = true;
+}
 }

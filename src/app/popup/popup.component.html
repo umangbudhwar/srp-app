@@ -50,6 +50,12 @@
                                 <div class = "popupStyle" *dxTemplate="let data of 'content'">
                                     <h4 class = "myfont">Faculty Dialog</h4>
                                     <div class = "row">
+                                        <div class="col-md-12 text-right">
+                                            <!-- <a class="nav-link" (onClick)="back()">Back</a> -->
+                                            <dx-button class="button-info" text="Back" (onClick)="back()"></dx-button>
+                                        </div>
+                                    </div>
+                                    <div class = "row">
                                         <div class="col-md-6" style = "padding-left: 30px;">
                                             <!-- <dx-button class="button-info" (onClick)="facultyRegistration()"> -->
                                                 <dx-button class="button-info" routerLink="/registerFaculty">
@@ -81,7 +87,14 @@
                                 <div class = "popupStyle" *dxTemplate="let data of 'content'">
                                     <h4 class = "myfont">Student Dialog</h4>
                                     <div class = "row">
+                                        <div class="col-md-12 text-right">
+                                            <dx-button class="button-info" text="Back" (onClick)="back()"></dx-button>
+                                            <!-- <a class="nav-link" (onClick)="back()">Back</a> -->
+                                        </div>
+                                    </div>
+                                    <div class = "row">
                                         <div class="col-md-6" style = "padding-left: 30px;">
+                                            
                                             <!-- <dx-button class="button-info" (onClick)="facultyRegistration()"> -->
                                                 <dx-button class="button-info" routerLink="/registerStudent">
                                                 <img class = "buttonStyle" src="assets/images/register.png"/>
@@ -99,7 +112,6 @@
                                     </div>
                                 </div>
                             </dx-popup>
-
                         </div>  
                     </div>
                 </div>

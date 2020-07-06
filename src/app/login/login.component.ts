@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthenticationService } from '../shared/service/authentication.service';
 import { ErrorsHandler } from '../shared/common/errors-handler';
+import notify from 'devextreme/ui/notify';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +41,8 @@ export class LoginComponent implements OnInit {
       (error) => {
         this.loadingVisible = false;
         this.invalidLogin = true;
-        this.errorHandler.handleError(error);
+        notify('User Invalid.', 'error', 4000);
+        // this.errorHandler.handleError(error);
       }
     )
     );

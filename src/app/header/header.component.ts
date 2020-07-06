@@ -26,8 +26,8 @@ export class HeaderComponent implements OnInit {
     this.userAuth = this.authenticationService.getAuthUser();
 
     if(this.userAuth!=null){
-      this.showDiv = true;
       this.isFaculty();
+      this.showDiv = true;
     }
   }
   isFaculty():boolean{

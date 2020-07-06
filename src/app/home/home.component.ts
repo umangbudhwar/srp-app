@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserAuth } from '../shared/model/user-auth';
 import { AuthenticationService } from '../shared/service/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   isStudent:boolean = false;
   showDiv:boolean = false;
 
-  constructor(public authenticationService: AuthenticationService) { }
+  constructor(private router: Router,public authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
     this.loadingVisible =false;
@@ -30,7 +31,7 @@ export class HomeComponent implements OnInit {
         this.isFaculty = true;
       } 
       else if (this.userAuth.role.toUpperCase().search('STUDENT') != -1){
-        this.isStudent = true;
+        this.router.navigate(['/home/verifyProfile']);
       }
       this.showDiv = true;
   }

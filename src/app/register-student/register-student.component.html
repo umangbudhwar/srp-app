@@ -44,8 +44,10 @@
                                                 <dx-validator>
                                                     <dxi-validation-rule type="required" message="OTP is required"></dxi-validation-rule>
                                                     <dxi-validation-rule type="numeric" message="OTP must contain only numbers"></dxi-validation-rule>
-                                                    <dxi-validation-rule type="pattern" [pattern]="otp" message="Please enter correct OTP"></dxi-validation-rule>
+                                                    <!-- <dxi-validation-rule type="pattern" [pattern]="otp" message="Please enter correct OTP"></dxi-validation-rule> -->
                                                     <dxi-validation-rule type="stringLength" [min]="6" [max] = "6" message="OTP must be of 6 digits"></dxi-validation-rule>
+                                                    <dxi-validation-rule type="compare" [comparisonTarget]="otpComparison"
+                                                        message="OTP do not match"></dxi-validation-rule>
                                                 </dx-validator>
                                             </dx-text-box>
                                     </div>
